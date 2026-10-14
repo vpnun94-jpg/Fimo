@@ -48,7 +48,7 @@
         }
 
         .glass-hud {
-            background: linear-gradient(135deg, rgba(15, 23, 42, 0.85), rgba(5, 8, 17, 0.95));
+            background: linear-gradient(135deg, rgba(15, 23, 42, 0.9), rgba(5, 8, 17, 0.98));
             backdrop-filter: blur(20px);
             -webkit-backdrop-filter: blur(20px);
             border: 1px solid rgba(0, 242, 255, 0.15);
@@ -56,7 +56,7 @@
         }
 
         .light .glass-hud {
-            background: rgba(255, 255, 255, 0.92);
+            background: rgba(255, 255, 255, 0.95);
             border: 1px solid rgba(0, 0, 0, 0.1);
         }
 
@@ -71,7 +71,7 @@
         }
 
         .btn-cyber {
-            border-radius: 16px;
+            border-radius: 14px;
             position: relative;
             overflow: hidden;
             transition: transform 0.15s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.2s ease, background 0.2s ease;
@@ -81,24 +81,24 @@
         }
 
         .btn-cyber:active, .btn-cyber.btn-pressed {
-            transform: scale(0.88) translateY(3px);
+            transform: scale(0.88) translateY(2px);
         }
 
         .btn-num:active, .btn-num.btn-pressed {
-            box-shadow: 0 0 25px rgba(0, 242, 255, 0.7), inset 0 0 10px rgba(0, 242, 255, 0.4);
+            box-shadow: 0 0 20px rgba(0, 242, 255, 0.7), inset 0 0 8px rgba(0, 242, 255, 0.4);
             border-color: #00f2ff;
             background: rgba(0, 242, 255, 0.15) !important;
         }
 
         .btn-action:active, .btn-action.btn-pressed {
-            box-shadow: 0 0 30px rgba(121, 40, 202, 0.8), inset 0 0 12px rgba(121, 40, 202, 0.5);
+            box-shadow: 0 0 25px rgba(121, 40, 202, 0.8), inset 0 0 10px rgba(121, 40, 202, 0.5);
             border-color: #7928ca;
             background: rgba(121, 40, 202, 0.25) !important;
             color: #fff !important;
         }
 
         .btn-danger:active, .btn-danger.btn-pressed {
-            box-shadow: 0 0 30px rgba(255, 0, 127, 0.8), inset 0 0 12px rgba(255, 0, 127, 0.5);
+            box-shadow: 0 0 25px rgba(255, 0, 127, 0.8), inset 0 0 10px rgba(255, 0, 127, 0.5);
             border-color: #ff007f;
             background: rgba(255, 0, 127, 0.25) !important;
         }
@@ -107,7 +107,7 @@
             position: absolute;
             border-radius: 50%;
             transform: scale(0);
-            animation: plasmaRipple 0.5s cubic-bezier(0.25, 1, 0.5, 1);
+            animation: plasmaRipple 0.4s cubic-bezier(0.25, 1, 0.5, 1);
             background: radial-gradient(circle, rgba(0,242,255,0.8) 0%, rgba(255,0,127,0.4) 40%, transparent 70%);
             pointer-events: none;
         }
@@ -127,11 +127,11 @@
         ::-webkit-scrollbar-thumb { background: rgba(0, 242, 255, 0.3); border-radius: 8px; }
 
         .result-animate {
-            animation: springUp 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            animation: springUp 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
 
         @keyframes springUp {
-            0% { transform: translateY(8px) scale(0.95); opacity: 0.5; filter: blur(4px); }
+            0% { transform: translateY(6px) scale(0.96); opacity: 0.5; filter: blur(3px); }
             100% { transform: translateY(0) scale(1); opacity: 1; filter: blur(0); }
         }
     </style>
@@ -140,19 +140,19 @@
 
     <canvas id="particle-canvas"></canvas>
 
-    <div class="relative w-full h-full glass-hud hud-border flex flex-col justify-between p-3 overflow-hidden text-white light:text-gray-900 transition-colors duration-300 z-20">
+    <div class="relative w-full h-full glass-hud hud-border flex flex-col justify-between p-2.5 overflow-hidden text-white light:text-gray-900 transition-colors duration-300 z-20">
         
         <!-- Top Controls Bar -->
-        <div class="flex justify-between items-center z-20 px-1 pt-1">
-            <button id="toggle-history" class="p-2 rounded-xl bg-white/5 hover:bg-white/15 active:scale-95 transition text-cyber-blue border border-cyber-blue/20">
+        <div class="flex justify-between items-center z-20 px-1">
+            <button id="toggle-history" class="p-1.5 rounded-xl bg-white/5 hover:bg-white/15 active:scale-95 transition text-cyber-blue border border-cyber-blue/20">
                 <i data-lucide="clock" class="w-4 h-4"></i>
             </button>
 
             <div class="flex items-center gap-1.5">
-                <button id="toggle-scientific" class="px-3 py-1 rounded-xl bg-white/5 hover:bg-white/15 text-xs font-semibold text-cyber-blue border border-cyber-blue/30 active:scale-95 transition shadow-[0_0_10px_rgba(0,242,255,0.2)]">
+                <button id="toggle-scientific" class="px-2.5 py-1 rounded-xl bg-white/5 hover:bg-white/15 text-xs font-semibold text-cyber-blue border border-cyber-blue/30 active:scale-95 transition">
                     SCI
                 </button>
-                <button id="toggle-theme" class="p-2 rounded-xl bg-white/5 hover:bg-white/15 active:scale-95 transition text-cyber-blue border border-cyber-blue/20">
+                <button id="toggle-theme" class="p-1.5 rounded-xl bg-white/5 hover:bg-white/15 active:scale-95 transition text-cyber-blue border border-cyber-blue/20">
                     <i data-lucide="sun" class="w-4 h-4 hidden light:block"></i>
                     <i data-lucide="moon" class="w-4 h-4 block light:hidden"></i>
                 </button>
@@ -176,68 +176,71 @@
         </div>
 
         <!-- Display Area -->
-        <div class="flex flex-col justify-end text-left px-2 py-2 dir-ltr overflow-hidden relative cursor-pointer" id="display-container">
-            <div id="expression" class="text-cyber-blue/70 text-xs font-mono h-5 overflow-x-auto whitespace-nowrap scrollbar-none"></div>
-            <div id="display" class="text-4xl font-light tracking-tight text-white light:text-gray-900 truncate font-mono drop-shadow-[0_0_15px_rgba(0,242,255,0.4)]">
+        <div class="flex flex-col justify-end text-left px-2 py-1 dir-ltr overflow-hidden relative cursor-pointer" id="display-container">
+            <div id="expression" class="text-cyber-blue/70 text-xs font-mono h-4 overflow-x-auto whitespace-nowrap scrollbar-none"></div>
+            <div id="display" class="text-3xl sm:text-4xl font-light tracking-tight text-white light:text-gray-900 truncate font-mono drop-shadow-[0_0_15px_rgba(0,242,255,0.4)]">
                 0
             </div>
         </div>
 
-        <!-- Scientific Panel -->
-        <div id="scientific-panel" class="grid grid-cols-5 gap-1.5 mb-1 hidden dir-ltr">
-            <button class="btn-cyber btn-action py-2 text-[11px] text-cyber-blue" data-op="sin">sin</button>
-            <button class="btn-cyber btn-action py-2 text-[11px] text-cyber-blue" data-op="cos">cos</button>
-            <button class="btn-cyber btn-action py-2 text-[11px] text-cyber-blue" data-op="tan">tan</button>
-            <button class="btn-cyber btn-action py-2 text-[11px] text-cyber-blue" data-op="log">log</button>
-            <button class="btn-cyber btn-action py-2 text-[11px] text-cyber-blue" data-op="ln">ln</button>
-            <button class="btn-cyber btn-num py-2 text-[11px] text-gray-300" data-op="sqrt">√</button>
-            <button class="btn-cyber btn-num py-2 text-[11px] text-gray-300" data-op="pow">x²</button>
-            <button class="btn-cyber btn-num py-2 text-[11px] text-gray-300" data-op="pi">π</button>
-            <button class="btn-cyber btn-num py-2 text-[11px] text-gray-300" data-op="e">e</button>
-            <button class="btn-cyber btn-num py-2 text-[11px] text-gray-300" data-op="fact">n!</button>
-        </div>
+        <!-- Compact Interactive Layout (No Extra Gap) -->
+        <div class="flex flex-col gap-1.5 pb-1">
+            <!-- Scientific Panel -->
+            <div id="scientific-panel" class="grid grid-cols-5 gap-1 hidden dir-ltr">
+                <button class="btn-cyber btn-action py-1.5 text-[11px] text-cyber-blue" data-op="sin">sin</button>
+                <button class="btn-cyber btn-action py-1.5 text-[11px] text-cyber-blue" data-op="cos">cos</button>
+                <button class="btn-cyber btn-action py-1.5 text-[11px] text-cyber-blue" data-op="tan">tan</button>
+                <button class="btn-cyber btn-action py-1.5 text-[11px] text-cyber-blue" data-op="log">log</button>
+                <button class="btn-cyber btn-action py-1.5 text-[11px] text-cyber-blue" data-op="ln">ln</button>
+                <button class="btn-cyber btn-num py-1.5 text-[11px] text-gray-300" data-op="sqrt">√</button>
+                <button class="btn-cyber btn-num py-1.5 text-[11px] text-gray-300" data-op="pow">x²</button>
+                <button class="btn-cyber btn-num py-1.5 text-[11px] text-gray-300" data-op="pi">π</button>
+                <button class="btn-cyber btn-num py-1.5 text-[11px] text-gray-300" data-op="e">e</button>
+                <button class="btn-cyber btn-num py-1.5 text-[11px] text-gray-300" data-op="fact">n!</button>
+            </div>
 
-        <!-- Memory Row -->
-        <div class="grid grid-cols-4 gap-1.5 mb-2 dir-ltr">
-            <button class="btn-cyber py-1.5 text-[11px] text-gray-400 btn-num" data-mem="mc">MC</button>
-            <button class="btn-cyber py-1.5 text-[11px] text-gray-400 btn-num" data-mem="mr">MR</button>
-            <button class="btn-cyber py-1.5 text-[11px] text-gray-400 btn-num" data-mem="m+">M+</button>
-            <button class="btn-cyber py-1.5 text-[11px] text-gray-400 btn-num" data-mem="m-">M-</button>
-        </div>
+            <!-- Memory Row -->
+            <div class="grid grid-cols-4 gap-1 dir-ltr">
+                <button class="btn-cyber py-1 text-[11px] text-gray-400 btn-num" data-mem="mc">MC</button>
+                <button class="btn-cyber py-1 text-[11px] text-gray-400 btn-num" data-mem="mr">MR</button>
+                <button class="btn-cyber py-1 text-[11px] text-gray-400 btn-num" data-mem="m+">M+</button>
+                <button class="btn-cyber py-1 text-[11px] text-gray-400 btn-num" data-mem="m-">M-</button>
+            </div>
 
-        <!-- Main Keypad Grid -->
-        <div class="grid grid-cols-4 gap-2.5 dir-ltr pb-2">
-            <!-- Row 1 -->
-            <button class="btn-cyber btn-danger h-12 text-cyber-pink font-semibold text-lg" id="btn-clear">C</button>
-            <button class="btn-cyber btn-action h-12 text-cyber-blue font-semibold text-lg" data-action="(">(</button>
-            <button class="btn-cyber btn-action h-12 text-cyber-blue font-semibold text-lg" data-action=")">)</button>
-            <button class="btn-cyber btn-action h-12 text-cyber-blue font-semibold text-xl" data-action="/">÷</button>
+            <!-- Main Keypad Grid -->
+            <div class="grid grid-cols-4 gap-1.5 dir-ltr">
+                <!-- Row 1 -->
+                <button class="btn-cyber btn-danger h-11 text-cyber-pink font-semibold text-base" id="btn-clear">C</button>
+                <button class="btn-cyber btn-action h-11 text-cyber-blue font-semibold text-base" data-action="(">(</button>
+                <button class="btn-cyber btn-action h-11 text-cyber-blue font-semibold text-base" data-action=")">)</button>
+                <button class="btn-cyber btn-action h-11 text-cyber-blue font-semibold text-lg" data-action="/">÷</button>
 
-            <!-- Row 2 -->
-            <button class="btn-cyber btn-num h-12 text-white light:text-gray-800 text-xl font-medium" data-num="7">7</button>
-            <button class="btn-cyber btn-num h-12 text-white light:text-gray-800 text-xl font-medium" data-num="8">8</button>
-            <button class="btn-cyber btn-num h-12 text-white light:text-gray-800 text-xl font-medium" data-num="9">9</button>
-            <button class="btn-cyber btn-action h-12 text-cyber-blue font-semibold text-xl" data-action="*">×</button>
+                <!-- Row 2 -->
+                <button class="btn-cyber btn-num h-11 text-white light:text-gray-800 text-lg font-medium" data-num="7">7</button>
+                <button class="btn-cyber btn-num h-11 text-white light:text-gray-800 text-lg font-medium" data-num="8">8</button>
+                <button class="btn-cyber btn-num h-11 text-white light:text-gray-800 text-lg font-medium" data-num="9">9</button>
+                <button class="btn-cyber btn-action h-11 text-cyber-blue font-semibold text-lg" data-action="*">×</button>
 
-            <!-- Row 3 -->
-            <button class="btn-cyber btn-num h-12 text-white light:text-gray-800 text-xl font-medium" data-num="4">4</button>
-            <button class="btn-cyber btn-num h-12 text-white light:text-gray-800 text-xl font-medium" data-num="5">5</button>
-            <button class="btn-cyber btn-num h-12 text-white light:text-gray-800 text-xl font-medium" data-num="6">6</button>
-            <button class="btn-cyber btn-action h-12 text-cyber-blue font-semibold text-xl" data-action="-">-</button>
+                <!-- Row 3 -->
+                <button class="btn-cyber btn-num h-11 text-white light:text-gray-800 text-lg font-medium" data-num="4">4</button>
+                <button class="btn-cyber btn-num h-11 text-white light:text-gray-800 text-lg font-medium" data-num="5">5</button>
+                <button class="btn-cyber btn-num h-11 text-white light:text-gray-800 text-lg font-medium" data-num="6">6</button>
+                <button class="btn-cyber btn-action h-11 text-cyber-blue font-semibold text-lg" data-action="-">-</button>
 
-            <!-- Row 4 -->
-            <button class="btn-cyber btn-num h-12 text-white light:text-gray-800 text-xl font-medium" data-num="1">1</button>
-            <button class="btn-cyber btn-num h-12 text-white light:text-gray-800 text-xl font-medium" data-num="2">2</button>
-            <button class="btn-cyber btn-num h-12 text-white light:text-gray-800 text-xl font-medium" data-num="3">3</button>
-            <button class="btn-cyber btn-action h-12 text-cyber-blue font-semibold text-xl" data-action="+">+</button>
+                <!-- Row 4 -->
+                <button class="btn-cyber btn-num h-11 text-white light:text-gray-800 text-lg font-medium" data-num="1">1</button>
+                <button class="btn-cyber btn-num h-11 text-white light:text-gray-800 text-lg font-medium" data-num="2">2</button>
+                <button class="btn-cyber btn-num h-11 text-white light:text-gray-800 text-lg font-medium" data-num="3">3</button>
+                <button class="btn-cyber btn-action h-11 text-cyber-blue font-semibold text-lg" data-action="+">+</button>
 
-            <!-- Row 5 -->
-            <button class="btn-cyber btn-num h-12 text-white light:text-gray-800 text-xl font-medium" data-num="0">0</button>
-            <button class="btn-cyber btn-num h-12 text-white light:text-gray-800 text-xl font-medium" data-num=".">.</button>
-            <button class="btn-cyber btn-danger h-12 text-gray-300 flex items-center justify-center" id="btn-backspace">
-                <i data-lucide="delete" class="w-5 h-5"></i>
-            </button>
-            <button class="btn-cyber btn-equals btn-action h-12 bg-gradient-to-r from-cyber-blue to-cyber-purple text-white font-bold text-2xl shadow-[0_0_20px_rgba(0,242,255,0.4)]" id="btn-equals">=</button>
+                <!-- Row 5 -->
+                <button class="btn-cyber btn-num h-11 text-white light:text-gray-800 text-lg font-medium" data-num="0">0</button>
+                <button class="btn-cyber btn-num h-11 text-white light:text-gray-800 text-lg font-medium" data-num=".">.</button>
+                <button class="btn-cyber btn-danger h-11 text-gray-300 flex items-center justify-center" id="btn-backspace">
+                    <i data-lucide="delete" class="w-4 h-4"></i>
+                </button>
+                <button class="btn-cyber btn-equals btn-action h-11 bg-gradient-to-r from-cyber-blue to-cyber-purple text-white font-bold text-xl shadow-[0_0_15px_rgba(0,242,255,0.4)]" id="btn-equals">=</button>
+            </div>
         </div>
     </div>
 
@@ -285,7 +288,7 @@
         }
 
         function createParticleBurst(x, y) {
-            for (let i = 0; i < 12; i++) {
+            for (let i = 0; i < 10; i++) {
                 particles.push(new QuantumParticle(x, y));
             }
         }
@@ -314,7 +317,7 @@
         const scientificPanel = document.getElementById('scientific-panel');
 
         function triggerHaptic() {
-            if ('vibrate' in navigator) navigator.vibrate(25);
+            if ('vibrate' in navigator) navigator.vibrate(20);
         }
 
         document.querySelectorAll('.btn-cyber').forEach(button => {
@@ -353,11 +356,6 @@
             updateDisplay();
         }
 
-        function handleOperator(op) {
-            currentInput += ` ${op} `;
-            updateDisplay();
-        }
-
         function calculate() {
             try {
                 let expressionStr = currentInput
@@ -375,7 +373,7 @@
                 currentInput = result.toString();
 
                 display.classList.add('result-animate');
-                setTimeout(() => display.classList.remove('result-animate'), 250);
+                setTimeout(() => display.classList.remove('result-animate'), 200);
 
                 updateDisplay();
             } catch (err) {
