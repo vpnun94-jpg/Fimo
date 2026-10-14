@@ -31,67 +31,74 @@
     </script>
     
     <style>
-        body {
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html, body {
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
             user-select: none;
             -webkit-user-select: none;
             touch-action: manipulation;
             font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            overflow: hidden;
+            background-color: #080b12;
         }
 
         .glass-panel {
-            background: rgba(15, 22, 38, 0.85);
+            background: rgba(15, 22, 38, 0.9);
             backdrop-filter: blur(15px);
             -webkit-backdrop-filter: blur(15px);
-            border: 1px solid rgba(255, 255, 255, 0.08);
         }
 
         .light .glass-panel {
-            background: rgba(255, 255, 255, 0.9);
-            border: 1px solid rgba(0, 0, 0, 0.08);
+            background: rgba(255, 255, 255, 0.95);
         }
 
         .btn-pro {
-            border-radius: 18px;
+            border-radius: 16px;
             position: relative;
             overflow: hidden;
-            transition: transform 0.12s ease, box-shadow 0.15s ease, background-color 0.15s ease;
-            border: 1px solid rgba(255, 255, 255, 0.05);
+            transition: transform 0.1s ease, box-shadow 0.15s ease, background-color 0.15s ease;
+            border: 1px solid rgba(255, 255, 255, 0.06);
             background: rgba(255, 255, 255, 0.04);
         }
 
         .btn-pro:active, .btn-pro.btn-pressed {
-            transform: scale(0.92) translateY(2px);
+            transform: scale(0.91) translateY(2px);
         }
 
         .btn-num:active, .btn-num.btn-pressed {
-            box-shadow: 0 0 15px rgba(255, 255, 255, 0.4);
-            border-color: rgba(255, 255, 255, 0.7);
-            background: rgba(255, 255, 255, 0.15) !important;
+            box-shadow: 0 0 15px rgba(255, 255, 255, 0.5);
+            border-color: rgba(255, 255, 255, 0.8);
+            background: rgba(255, 255, 255, 0.18) !important;
         }
 
         .btn-action:active, .btn-action.btn-pressed {
-            box-shadow: 0 0 20px rgba(0, 210, 255, 0.7);
+            box-shadow: 0 0 20px rgba(0, 210, 255, 0.8);
             border-color: #00d2ff;
-            background: rgba(0, 210, 255, 0.2) !important;
+            background: rgba(0, 210, 255, 0.25) !important;
             color: #ffffff !important;
         }
 
         .btn-danger:active, .btn-danger.btn-pressed {
-            box-shadow: 0 0 20px rgba(239, 68, 68, 0.7);
+            box-shadow: 0 0 20px rgba(239, 68, 68, 0.8);
             border-color: #ef4444;
-            background: rgba(239, 68, 68, 0.25) !important;
+            background: rgba(239, 68, 68, 0.3) !important;
         }
 
         .btn-equals:active, .btn-equals.btn-pressed {
-            box-shadow: 0 0 25px rgba(67, 100, 247, 0.8);
+            box-shadow: 0 0 25px rgba(67, 100, 247, 0.9);
         }
 
         .ripple {
             position: absolute;
             border-radius: 50%;
             transform: scale(0);
-            animation: ripple-glow 0.4s ease-out;
+            animation: ripple-glow 0.35s ease-out;
             background: radial-gradient(circle, rgba(255,255,255,0.7) 0%, rgba(255,255,255,0) 70%);
             pointer-events: none;
         }
@@ -113,13 +120,13 @@
         }
     </style>
 </head>
-<body class="bg-brand-darkBg light:bg-gray-100 text-white light:text-gray-900 h-screen w-screen flex justify-center items-center p-2">
+<body class="flex justify-center items-center">
 
-    <!-- App Container (Adjusted Height to fit all screens perfectly) -->
-    <div class="relative w-full max-w-sm h-full max-h-[680px] rounded-[32px] glass-panel shadow-2xl flex flex-col justify-between p-3.5 overflow-hidden border border-white/10">
+    <!-- App Container (Exact Full Screen Fit) -->
+    <div class="relative w-full h-full glass-panel flex flex-col justify-between p-3 overflow-hidden text-white light:text-gray-900 transition-colors duration-300">
         
         <!-- Top Controls Bar -->
-        <div class="flex justify-between items-center z-20 px-1">
+        <div class="flex justify-between items-center z-20 px-1 pt-1">
             <button id="toggle-history" class="p-2 rounded-xl bg-white/5 hover:bg-white/10 active:scale-95 transition text-gray-300 light:text-gray-700">
                 <i data-lucide="clock" class="w-4 h-4"></i>
             </button>
@@ -136,7 +143,7 @@
         </div>
 
         <!-- History Drawer -->
-        <div id="history-drawer" class="absolute inset-x-0 top-0 h-[60%] glass-panel rounded-b-[28px] z-30 transform -translate-y-full transition-transform duration-300 ease-in-out p-4 flex flex-col justify-between shadow-2xl">
+        <div id="history-drawer" class="absolute inset-x-0 top-0 h-[65%] glass-panel rounded-b-3xl z-30 transform -translate-y-full transition-transform duration-300 ease-in-out p-4 flex flex-col justify-between shadow-2xl border-b border-white/10">
             <div class="flex justify-between items-center border-b border-white/10 pb-2">
                 <span class="font-bold text-xs text-brand-blue flex items-center gap-1.5">
                     <i data-lucide="history" class="w-3.5 h-3.5"></i> سجل الحسابات
@@ -152,68 +159,68 @@
         </div>
 
         <!-- Display Area -->
-        <div class="flex flex-col justify-end text-left px-2 py-1 dir-ltr overflow-hidden relative cursor-pointer" id="display-container">
+        <div class="flex flex-col justify-end text-left px-2 py-2 dir-ltr overflow-hidden relative cursor-pointer" id="display-container">
             <div id="expression" class="text-gray-400 light:text-gray-500 text-xs font-mono h-5 overflow-x-auto whitespace-nowrap scrollbar-none"></div>
-            <div id="display" class="text-3xl sm:text-4xl font-light tracking-tight text-white light:text-gray-900 truncate font-mono">
+            <div id="display" class="text-4xl font-light tracking-tight text-white light:text-gray-900 truncate font-mono">
                 0
             </div>
         </div>
 
-        <!-- Scientific Panel (Compact) -->
+        <!-- Scientific Panel (Compact Fit) -->
         <div id="scientific-panel" class="grid grid-cols-5 gap-1.5 mb-1 hidden dir-ltr">
-            <button class="btn-pro btn-action py-1.5 text-[11px] text-brand-blue" data-op="sin">sin</button>
-            <button class="btn-pro btn-action py-1.5 text-[11px] text-brand-blue" data-op="cos">cos</button>
-            <button class="btn-pro btn-action py-1.5 text-[11px] text-brand-blue" data-op="tan">tan</button>
-            <button class="btn-pro btn-action py-1.5 text-[11px] text-brand-blue" data-op="log">log</button>
-            <button class="btn-pro btn-action py-1.5 text-[11px] text-brand-blue" data-op="ln">ln</button>
-            <button class="btn-pro btn-num py-1.5 text-[11px] text-gray-300" data-op="sqrt">√</button>
-            <button class="btn-pro btn-num py-1.5 text-[11px] text-gray-300" data-op="pow">x²</button>
-            <button class="btn-pro btn-num py-1.5 text-[11px] text-gray-300" data-op="pi">π</button>
-            <button class="btn-pro btn-num py-1.5 text-[11px] text-gray-300" data-op="e">e</button>
-            <button class="btn-pro btn-num py-1.5 text-[11px] text-gray-300" data-op="fact">n!</button>
+            <button class="btn-pro btn-action py-2 text-[11px] text-brand-blue" data-op="sin">sin</button>
+            <button class="btn-pro btn-action py-2 text-[11px] text-brand-blue" data-op="cos">cos</button>
+            <button class="btn-pro btn-action py-2 text-[11px] text-brand-blue" data-op="tan">tan</button>
+            <button class="btn-pro btn-action py-2 text-[11px] text-brand-blue" data-op="log">log</button>
+            <button class="btn-pro btn-action py-2 text-[11px] text-brand-blue" data-op="ln">ln</button>
+            <button class="btn-pro btn-num py-2 text-[11px] text-gray-300" data-op="sqrt">√</button>
+            <button class="btn-pro btn-num py-2 text-[11px] text-gray-300" data-op="pow">x²</button>
+            <button class="btn-pro btn-num py-2 text-[11px] text-gray-300" data-op="pi">π</button>
+            <button class="btn-pro btn-num py-2 text-[11px] text-gray-300" data-op="e">e</button>
+            <button class="btn-pro btn-num py-2 text-[11px] text-gray-300" data-op="fact">n!</button>
         </div>
 
         <!-- Memory Row -->
-        <div class="grid grid-cols-4 gap-1.5 mb-1.5 dir-ltr">
-            <button class="btn-pro py-1 text-[10px] text-gray-400 btn-num" data-mem="mc">MC</button>
-            <button class="btn-pro py-1 text-[10px] text-gray-400 btn-num" data-mem="mr">MR</button>
-            <button class="btn-pro py-1 text-[10px] text-gray-400 btn-num" data-mem="m+">M+</button>
-            <button class="btn-pro py-1 text-[10px] text-gray-400 btn-num" data-mem="m-">M-</button>
+        <div class="grid grid-cols-4 gap-1.5 mb-2 dir-ltr">
+            <button class="btn-pro py-1.5 text-[11px] text-gray-400 btn-num" data-mem="mc">MC</button>
+            <button class="btn-pro py-1.5 text-[11px] text-gray-400 btn-num" data-mem="mr">MR</button>
+            <button class="btn-pro py-1.5 text-[11px] text-gray-400 btn-num" data-mem="m+">M+</button>
+            <button class="btn-pro py-1.5 text-[11px] text-gray-400 btn-num" data-mem="m-">M-</button>
         </div>
 
-        <!-- Main Keypad Grid (Compact and Visible) -->
-        <div class="grid grid-cols-4 gap-2 dir-ltr">
+        <!-- Main Keypad Grid (Optimized Flex Height) -->
+        <div class="grid grid-cols-4 gap-2.5 dir-ltr pb-2">
             <!-- Row 1 -->
-            <button class="btn-pro btn-danger h-11 text-red-400 font-semibold text-base" id="btn-clear">C</button>
-            <button class="btn-pro btn-action h-11 text-brand-blue font-semibold text-base" data-action="(">(</button>
-            <button class="btn-pro btn-action h-11 text-brand-blue font-semibold text-base" data-action=")">)</button>
-            <button class="btn-pro btn-action h-11 text-brand-blue font-semibold text-lg" data-action="/">÷</button>
+            <button class="btn-pro btn-danger h-12 text-red-400 font-semibold text-lg" id="btn-clear">C</button>
+            <button class="btn-pro btn-action h-12 text-brand-blue font-semibold text-lg" data-action="(">(</button>
+            <button class="btn-pro btn-action h-12 text-brand-blue font-semibold text-lg" data-action=")">)</button>
+            <button class="btn-pro btn-action h-12 text-brand-blue font-semibold text-xl" data-action="/">÷</button>
 
             <!-- Row 2 -->
-            <button class="btn-pro btn-num h-11 text-white light:text-gray-800 text-lg font-medium" data-num="7">7</button>
-            <button class="btn-pro btn-num h-11 text-white light:text-gray-800 text-lg font-medium" data-num="8">8</button>
-            <button class="btn-pro btn-num h-11 text-white light:text-gray-800 text-lg font-medium" data-num="9">9</button>
-            <button class="btn-pro btn-action h-11 text-brand-blue font-semibold text-lg" data-action="*">×</button>
+            <button class="btn-pro btn-num h-12 text-white light:text-gray-800 text-xl font-medium" data-num="7">7</button>
+            <button class="btn-pro btn-num h-12 text-white light:text-gray-800 text-xl font-medium" data-num="8">8</button>
+            <button class="btn-pro btn-num h-12 text-white light:text-gray-800 text-xl font-medium" data-num="9">9</button>
+            <button class="btn-pro btn-action h-12 text-brand-blue font-semibold text-xl" data-action="*">×</button>
 
             <!-- Row 3 -->
-            <button class="btn-pro btn-num h-11 text-white light:text-gray-800 text-lg font-medium" data-num="4">4</button>
-            <button class="btn-pro btn-num h-11 text-white light:text-gray-800 text-lg font-medium" data-num="5">5</button>
-            <button class="btn-pro btn-num h-11 text-white light:text-gray-800 text-lg font-medium" data-num="6">6</button>
-            <button class="btn-pro btn-action h-11 text-brand-blue font-semibold text-lg" data-action="-">-</button>
+            <button class="btn-pro btn-num h-12 text-white light:text-gray-800 text-xl font-medium" data-num="4">4</button>
+            <button class="btn-pro btn-num h-12 text-white light:text-gray-800 text-xl font-medium" data-num="5">5</button>
+            <button class="btn-pro btn-num h-12 text-white light:text-gray-800 text-xl font-medium" data-num="6">6</button>
+            <button class="btn-pro btn-action h-12 text-brand-blue font-semibold text-xl" data-action="-">-</button>
 
             <!-- Row 4 -->
-            <button class="btn-pro btn-num h-11 text-white light:text-gray-800 text-lg font-medium" data-num="1">1</button>
-            <button class="btn-pro btn-num h-11 text-white light:text-gray-800 text-lg font-medium" data-num="2">2</button>
-            <button class="btn-pro btn-num h-11 text-white light:text-gray-800 text-lg font-medium" data-num="3">3</button>
-            <button class="btn-pro btn-action h-11 text-brand-blue font-semibold text-lg" data-action="+">+</button>
+            <button class="btn-pro btn-num h-12 text-white light:text-gray-800 text-xl font-medium" data-num="1">1</button>
+            <button class="btn-pro btn-num h-12 text-white light:text-gray-800 text-xl font-medium" data-num="2">2</button>
+            <button class="btn-pro btn-num h-12 text-white light:text-gray-800 text-xl font-medium" data-num="3">3</button>
+            <button class="btn-pro btn-action h-12 text-brand-blue font-semibold text-xl" data-action="+">+</button>
 
-            <!-- Row 5 (0, ., Backspace, =) -->
-            <button class="btn-pro btn-num h-11 text-white light:text-gray-800 text-lg font-medium" data-num="0">0</button>
-            <button class="btn-pro btn-num h-11 text-white light:text-gray-800 text-lg font-medium" data-num=".">.</button>
-            <button class="btn-pro btn-danger h-11 text-gray-300 flex items-center justify-center" id="btn-backspace">
-                <i data-lucide="delete" class="w-4 h-4"></i>
+            <!-- Row 5 -->
+            <button class="btn-pro btn-num h-12 text-white light:text-gray-800 text-xl font-medium" data-num="0">0</button>
+            <button class="btn-pro btn-num h-12 text-white light:text-gray-800 text-xl font-medium" data-num=".">.</button>
+            <button class="btn-pro btn-danger h-12 text-gray-300 flex items-center justify-center" id="btn-backspace">
+                <i data-lucide="delete" class="w-5 h-5"></i>
             </button>
-            <button class="btn-pro btn-equals h-11 bg-gradient-to-r from-brand-gradientStart via-brand-gradientMid to-brand-gradientEnd text-white font-bold text-xl shadow-md" id="btn-equals">=</button>
+            <button class="btn-pro btn-equals h-12 bg-gradient-to-r from-brand-gradientStart via-brand-gradientMid to-brand-gradientEnd text-white font-bold text-2xl shadow-lg" id="btn-equals">=</button>
         </div>
     </div>
 
@@ -269,9 +276,9 @@
             expression.innerText = expressionVal;
             
             const len = display.innerText.length;
-            if (len > 12) display.style.fontSize = '1.5rem';
-            else if (len > 8) display.style.fontSize = '2rem';
-            else display.style.fontSize = '2.5rem';
+            if (len > 12) display.style.fontSize = '1.8rem';
+            else if (len > 8) display.style.fontSize = '2.4rem';
+            else display.style.fontSize = '3rem';
         }
 
         function handleNumber(num) {
