@@ -1,159 +1,470 @@
 <!DOCTYPE html>
-<html lang="ar" dir="rtl">
+<html lang="ar" dir="rtl" class="dark">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>آلة حاسبة</title>
-    <style>
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-            font-family: Arial, sans-serif;
-        }
-
-        body {
-            background-color: #121212;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-        }
-
-        .calculator {
-            background-color: #121212;
-            width: 100%;
-            max-width: 400px;
-            height: 100%;
-            max-height: 700px;
-            display: flex;
-            flex-direction: column;
-            justify-content: flex-end;
-            padding: 20px;
-        }
-
-        .display {
-            color: #ffffff;
-            font-size: 4rem;
-            text-align: left;
-            padding: 20px 10px;
-            word-wrap: break-word;
-            word-break: break-all;
-            min-height: 120px;
-        }
-
-        .buttons {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 15px;
-        }
-
-        button {
-            background-color: #1e1e1e;
-            color: #ffffff;
-            border: none;
-            border-radius: 20px;
-            font-size: 1.8rem;
-            height: 70px;
-            cursor: pointer;
-            transition: background-color 0.2s;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-
-        button:active {
-            background-color: #333333;
-        }
-
-        /* ألوان الأزرار الخاصة */
-        .c-btn {
-            color: #ff5252;
-        }
-
-        .operator {
-            color: #4dabf7;
-        }
-
-        .equals {
-            background-color: #228be6;
-            color: #ffffff;
-            border-radius: 25px;
-        }
-
-        .equals:active {
-            background-color: #1c7ed6;
-        }
-    </style>
-</head>
-<body>
-
-    <div class="calculator">
-        <div class="display" id="display">0</div>
-        <div class="buttons">
-            <button class="c-btn" onclick="clearDisplay()">C</button>
-            <button class="operator" onclick="appendCharacter('%')">%</button>
-            <button class="operator" onclick="deleteLast()">⌫</button>
-            <button class="operator" onclick="appendCharacter('/')">÷</button>
-
-            <button onclick="appendCharacter('7')">7</button>
-            <button onclick="appendCharacter('8')">8</button>
-            <button onclick="appendCharacter('9')">9</button>
-            <button class="operator" onclick="appendCharacter('*')">×</button>
-
-            <button onclick="appendCharacter('4')">4</button>
-            <button onclick="appendCharacter('5')">5</button>
-            <button onclick="appendCharacter('6')">6</button>
-            <button class="operator" onclick="appendCharacter('-')">-</button>
-
-            <button onclick="appendCharacter('1')">1</button>
-            <button onclick="appendCharacter('2')">2</button>
-            <button onclick="appendCharacter('3')">3</button>
-            <button class="operator" onclick="appendCharacter('+')">+</button>
-
-            <button onclick="appendCharacter('0')">0</button>
-            <button onclick="appendCharacter('.')">.</button>
-            <button class="equals" onclick="calculateResult()" style="grid-column: span 2;">=</button>
-        </div>
-    </div>
-
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Pro Scientific Calculator</title>
+    <!-- PWA Settings -->
+    <meta name="theme-color" content="#090d16">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    
+    <!-- Tailwind CSS & Lucide Icons -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    
     <script>
-        const display = document.getElementById('display');
-
-        function appendCharacter(char) {
-            if (display.innerText === '0' && char !== '.') {
-                display.innerText = char;
-            } else {
-                display.innerText += char;
-            }
-        }
-
-        function clearDisplay() {
-            display.innerText = '0';
-        }
-
-        function deleteLast() {
-            if (display.innerText.length > 1) {
-                display.innerText = display.innerText.slice(0, -1);
-            } else {
-                display.innerText = '0';
-            }
-        }
-
-        function calculateResult() {
-            try {
-                // استبدال الرموز لتعمل بشكل صحيح في البرمجة
-                let expression = display.innerText
-                    .replace(/×/g, '*')
-                    .replace(/÷/g, '/');
-                
-                let result = eval(expression);
-                display.innerText = result;
-            } catch (error) {
-                display.innerText = 'خطأ';
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            blue: '#00d2ff',
+                            gradientStart: '#0052D4',
+                            gradientMid: '#4364F7',
+                            gradientEnd: '#6FB1FC',
+                            darkBg: '#090d16',
+                            cardBg: '#131b2e'
+                        }
+                    },
+                    boxShadow: {
+                        'neon': '0 0 20px rgba(0, 210, 255, 0.35)',
+                        'squircle': '6px 6px 14px rgba(0,0,0,0.4), -4px -4px 10px rgba(255,255,255,0.03)',
+                        'squircle-active': 'inset 3px 3px 6px rgba(0,0,0,0.6), inset -2px -2px 4px rgba(255,255,255,0.05)',
+                        'glow-equals': '0 8px 25px rgba(67, 100, 247, 0.5)'
+                    }
+                }
             }
         }
     </script>
+    
+    <style>
+        /* Base styles & Micro-interactions */
+        body {
+            user-select: none;
+            -webkit-user-select: none;
+            touch-action: manipulation;
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        }
 
+        /* Glassmorphism Effect */
+        .glass-panel {
+            background: rgba(19, 27, 46, 0.65);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .light .glass-panel {
+            background: rgba(255, 255, 255, 0.7);
+            border: 1px solid rgba(0, 0, 0, 0.08);
+        }
+
+        /* 3D Press Animation & Squircle Buttons */
+        .btn-squircle {
+            border-radius: 22px;
+            transition: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-squircle:active {
+            transform: scale(0.93) translateY(2px);
+        }
+
+        /* Ripple Effect */
+        .ripple {
+            position: absolute;
+            border-radius: 50%;
+            transform: scale(0);
+            animation: ripple-effect 0.5s linear;
+            background-color: rgba(255, 255, 255, 0.25);
+            pointer-events: none;
+        }
+
+        @keyframes ripple-effect {
+            to {
+                transform: scale(4);
+                opacity: 0;
+            }
+        }
+
+        /* Custom Scrollbar for Drawer & Display */
+        ::-webkit-scrollbar {
+            width: 4px;
+            height: 4px;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 10px;
+        }
+
+        /* Animated Result Transition */
+        .result-animate {
+            animation: springUp 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        @keyframes springUp {
+            0% { transform: translateY(10px) scale(0.95); opacity: 0.5; }
+            100% { transform: translateY(0) scale(1); opacity: 1; }
+        }
+    </style>
+</head>
+<body class="bg-brand-darkBg light:bg-gray-100 text-white light:text-gray-900 h-screen w-screen flex justify-center items-center overflow-hidden transition-colors duration-300">
+
+    <!-- App Container -->
+    <div class="relative w-full max-w-md h-full sm:h-[92vh] sm:rounded-[40px] glass-panel shadow-2xl flex flex-col justify-between p-5 overflow-hidden border-0 sm:border border-white/10">
+        
+        <!-- Top Bar / Controls -->
+        <div class="flex justify-between items-center z-20 pt-2 pb-1 px-1">
+            <button id="toggle-history" class="p-2.5 rounded-2xl bg-white/5 hover:bg-white/10 active:scale-95 transition text-gray-300 light:text-gray-700">
+                <i data-lucide="history" class="w-5 h-5"></i>
+            </button>
+
+            <div class="flex items-center gap-2">
+                <button id="toggle-scientific" class="px-3 py-1.5 rounded-2xl bg-white/5 hover:bg-white/10 text-xs font-semibold text-brand-blue border border-brand-blue/20 active:scale-95 transition">
+                    SCI
+                </button>
+                <button id="toggle-theme" class="p-2.5 rounded-2xl bg-white/5 hover:bg-white/10 active:scale-95 transition text-gray-300 light:text-gray-700">
+                    <i data-lucide="sun" class="w-5 h-5 hidden light:block"></i>
+                    <i data-lucide="moon" class="w-5 h-5 block light:hidden"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- History Drawer Panel -->
+        <div id="history-drawer" class="absolute inset-x-0 top-0 h-[65%] glass-panel rounded-b-[35px] z-30 transform -translate-y-full transition-transform duration-300 ease-in-out p-5 flex flex-col justify-between shadow-2xl">
+            <div class="flex justify-between items-center border-b border-white/10 pb-3">
+                <span class="font-bold text-sm tracking-wide text-brand-blue flex items-center gap-2">
+                    <i data-lucide="clock" class="w-4 h-4"></i> السجل
+                </span>
+                <button id="clear-history" class="text-xs text-red-400 hover:text-red-300 flex items-center gap-1">
+                    <i data-lucide="trash-2" class="w-3.5 h-3.5"></i> مسح
+                </button>
+            </div>
+            <div id="history-list" class="flex-1 overflow-y-auto my-3 space-y-3 text-left dir-ltr">
+                <div class="text-center text-gray-500 text-sm py-10">لا يوجد سجل حتى الآن</div>
+            </div>
+            <button id="close-history" class="w-full py-2.5 rounded-2xl bg-white/10 hover:bg-white/15 text-xs font-semibold">إغلاق</button>
+        </div>
+
+        <!-- Display Area -->
+        <div class="flex-1 flex flex-col justify-end text-left px-2 py-4 dir-ltr overflow-hidden relative cursor-pointer" id="display-container">
+            <!-- Expression History -->
+            <div id="expression" class="text-gray-400 light:text-gray-500 text-sm sm:text-base font-mono h-6 overflow-x-auto whitespace-nowrap scrollbar-none transition-all"></div>
+            
+            <!-- Large Display Number -->
+            <div id="display" class="text-4xl sm:text-5xl font-light tracking-tight text-white light:text-gray-900 truncate my-1 font-mono transition-all duration-200">
+                0
+            </div>
+        </div>
+
+        <!-- Scientific Controls Panel (Expandable) -->
+        <div id="scientific-panel" class="grid grid-cols-5 gap-2 mb-2 hidden transition-all duration-300 dir-ltr">
+            <button class="btn-sci btn-squircle py-2.5 bg-white/5 hover:bg-white/10 text-xs font-medium text-brand-blue" data-op="sin">sin</button>
+            <button class="btn-sci btn-squircle py-2.5 bg-white/5 hover:bg-white/10 text-xs font-medium text-brand-blue" data-op="cos">cos</button>
+            <button class="btn-sci btn-squircle py-2.5 bg-white/5 hover:bg-white/10 text-xs font-medium text-brand-blue" data-op="tan">tan</button>
+            <button class="btn-sci btn-squircle py-2.5 bg-white/5 hover:bg-white/10 text-xs font-medium text-brand-blue" data-op="log">log</button>
+            <button class="btn-sci btn-squircle py-2.5 bg-white/5 hover:bg-white/10 text-xs font-medium text-brand-blue" data-op="ln">ln</button>
+            <button class="btn-sci btn-squircle py-2.5 bg-white/5 hover:bg-white/10 text-xs font-medium text-gray-300" data-op="sqrt">√</button>
+            <button class="btn-sci btn-squircle py-2.5 bg-white/5 hover:bg-white/10 text-xs font-medium text-gray-300" data-op="pow">x²</button>
+            <button class="btn-sci btn-squircle py-2.5 bg-white/5 hover:bg-white/10 text-xs font-medium text-gray-300" data-op="pi">π</button>
+            <button class="btn-sci btn-squircle py-2.5 bg-white/5 hover:bg-white/10 text-xs font-medium text-gray-300" data-op="e">e</button>
+            <button class="btn-sci btn-squircle py-2.5 bg-white/5 hover:bg-white/10 text-xs font-medium text-gray-300" data-op="fact">n!</button>
+        </div>
+
+        <!-- Memory Buttons Row -->
+        <div class="grid grid-cols-4 gap-2 mb-3 dir-ltr">
+            <button class="btn-mem py-1.5 rounded-xl bg-white/5 hover:bg-white/10 text-[11px] text-gray-400 hover:text-white transition" data-mem="mc">MC</button>
+            <button class="btn-mem py-1.5 rounded-xl bg-white/5 hover:bg-white/10 text-[11px] text-gray-400 hover:text-white transition" data-mem="mr">MR</button>
+            <button class="btn-mem py-1.5 rounded-xl bg-white/5 hover:bg-white/10 text-[11px] text-gray-400 hover:text-white transition" data-mem="m+">M+</button>
+            <button class="btn-mem py-1.5 rounded-xl bg-white/5 hover:bg-white/10 text-[11px] text-gray-400 hover:text-white transition" data-mem="m-">M-</button>
+        </div>
+
+        <!-- Main Keypad Grid -->
+        <div class="grid grid-cols-4 gap-3 dir-ltr">
+            <!-- Row 1 -->
+            <button class="btn-squircle h-14 bg-red-500/15 hover:bg-red-500/25 text-red-400 font-semibold text-lg" id="btn-clear">C</button>
+            <button class="btn-squircle h-14 bg-white/5 hover:bg-white/10 text-brand-blue font-semibold text-lg btn-action" data-action="(">(</button>
+            <button class="btn-squircle h-14 bg-white/5 hover:bg-white/10 text-brand-blue font-semibold text-lg btn-action" data-action=")">)</button>
+            <button class="btn-squircle h-14 bg-white/5 hover:bg-white/10 text-brand-blue font-semibold text-xl btn-action" data-action="/">÷</button>
+
+            <!-- Row 2 -->
+            <button class="btn-squircle h-14 bg-white/5 hover:bg-white/10 text-white light:text-gray-800 text-xl font-medium btn-num" data-num="7">7</button>
+            <button class="btn-squircle h-14 bg-white/5 hover:bg-white/10 text-white light:text-gray-800 text-xl font-medium btn-num" data-num="8">8</button>
+            <button class="btn-squircle h-14 bg-white/5 hover:bg-white/10 text-white light:text-gray-800 text-xl font-medium btn-num" data-num="9">9</button>
+            <button class="btn-squircle h-14 bg-white/5 hover:bg-white/10 text-brand-blue font-semibold text-xl btn-action" data-action="*">×</button>
+
+            <!-- Row 3 -->
+            <button class="btn-squircle h-14 bg-white/5 hover:bg-white/10 text-white light:text-gray-800 text-xl font-medium btn-num" data-num="4">4</button>
+            <button class="btn-squircle h-14 bg-white/5 hover:bg-white/10 text-white light:text-gray-800 text-xl font-medium btn-num" data-num="5">5</button>
+            <button class="btn-squircle h-14 bg-white/5 hover:bg-white/10 text-white light:text-gray-800 text-xl font-medium btn-num" data-num="6">6</button>
+            <button class="btn-squircle h-14 bg-white/5 hover:bg-white/10 text-brand-blue font-semibold text-xl btn-action" data-action="-">-</button>
+
+            <!-- Row 4 -->
+            <button class="btn-squircle h-14 bg-white/5 hover:bg-white/10 text-white light:text-gray-800 text-xl font-medium btn-num" data-num="1">1</button>
+            <button class="btn-squircle h-14 bg-white/5 hover:bg-white/10 text-white light:text-gray-800 text-xl font-medium btn-num" data-num="2">2</button>
+            <button class="btn-squircle h-14 bg-white/5 hover:bg-white/10 text-white light:text-gray-800 text-xl font-medium btn-num" data-num="3">3</button>
+            <button class="btn-squircle h-14 bg-white/5 hover:bg-white/10 text-brand-blue font-semibold text-xl btn-action" data-action="+">+</button>
+
+            <!-- Row 5 -->
+            <button class="btn-squircle h-14 bg-white/5 hover:bg-white/10 text-white light:text-gray-800 text-xl font-medium btn-num" data-num="0">0</button>
+            <button class="btn-squircle h-14 bg-white/5 hover:bg-white/10 text-white light:text-gray-800 text-xl font-medium btn-num" data-num=".">.</button>
+            <button class="btn-squircle h-14 bg-white/5 hover:bg-white/10 text-gray-300 text-lg flex items-center justify-center" id="btn-backspace">
+                <i data-lucide="delete" class="w-5 h-5"></i>
+            </button>
+            <!-- Gradient Equals Button -->
+            <button class="btn-squircle h-14 bg-gradient-to-r from-brand-gradientStart via-brand-gradientMid to-brand-gradientEnd text-white font-bold text-2xl shadow-glow-equals" id="btn-equals">=</button>
+        </div>
+    </div>
+
+    <!-- JavaScript Logic -->
+    <script>
+        // Init Lucide Icons
+        lucide.createIcons();
+
+        // App State
+        let currentInput = '0';
+        let expressionVal = '';
+        let memoryValue = 0;
+        let history = JSON.parse(localStorage.getItem('calc_history') || '[]');
+        let isScientificOpen = false;
+
+        // Elements
+        const display = document.getElementById('display');
+        const expression = document.getElementById('expression');
+        const historyDrawer = document.getElementById('history-drawer');
+        const historyList = document.getElementById('history-list');
+        const scientificPanel = document.getElementById('scientific-panel');
+
+        // Haptic Feedback Helper
+        function triggerHaptic() {
+            if ('vibrate' in navigator) {
+                navigator.vibrate(15);
+            }
+        }
+
+        // Ripple Effect on Click
+        document.querySelectorAll('button').forEach(button => {
+            button.addEventListener('click', function (e) {
+                triggerHaptic();
+                const circle = document.createElement('span');
+                const diameter = Math.max(button.clientWidth, button.clientHeight);
+                const radius = diameter / 2;
+                
+                const rect = button.getBoundingClientRect();
+                circle.style.width = circle.style.height = `${diameter}px`;
+                circle.style.left = `${e.clientX - rect.left - radius}px`;
+                circle.style.top = `${e.clientY - rect.top - radius}px`;
+                circle.classList.add('ripple');
+                
+                const ripple = button.getElementsByClassName('ripple')[0];
+                if (ripple) ripple.remove();
+                
+                button.appendChild(circle);
+            });
+        });
+
+        // Format Number with Floating Precision
+        function formatNumber(numStr) {
+            if (numStr === 'Error' || numStr === 'Infinity') return numStr;
+            const num = parseFloat(numStr);
+            if (isNaN(num)) return numStr;
+            return new Intl.NumberFormat('en-US', { maximumFractionDigits: 8 }).format(num);
+        }
+
+        // Update Display UI with Auto-Sizing
+        function updateDisplay() {
+            display.innerText = formatNumber(currentInput);
+            expression.innerText = expressionVal;
+            
+            // Auto-Sizing Typography
+            const len = display.innerText.length;
+            if (len > 12) {
+                display.style.fontSize = '1.8rem';
+            } else if (len > 8) {
+                display.style.fontSize = '2.5rem';
+            } else {
+                display.style.fontSize = '3rem';
+            }
+        }
+
+        // Handle Input Actions
+        function handleNumber(num) {
+            if (currentInput === '0' && num !== '.') {
+                currentInput = num;
+            } else if (num === '.' && currentInput.includes('.')) {
+                return;
+            } else {
+                currentInput += num;
+            }
+            updateDisplay();
+        }
+
+        function handleOperator(op) {
+            expressionVal += ` ${currentInput} ${op}`;
+            currentInput = '0';
+            updateDisplay();
+        }
+
+        function calculate() {
+            try {
+                let fullExpression = expressionVal + ' ' + currentInput;
+                let sanitizedExpr = fullExpression
+                    .replace(/×/g, '*')
+                    .replace(/÷/g, '/')
+                    .replace(/π/g, Math.PI)
+                    .replace(/e/g, Math.E);
+
+                let result = eval(sanitizedExpr);
+                
+                // Floating point precision fix
+                result = Math.round(result * 1e8) / 1e8;
+
+                // Save to history
+                saveHistory(fullExpression, result);
+
+                // Animated Result Transition
+                display.classList.add('result-animate');
+                setTimeout(() => display.classList.remove('result-animate'), 300);
+
+                currentInput = result.toString();
+                expressionVal = '';
+                updateDisplay();
+            } catch (err) {
+                currentInput = 'Error';
+                updateDisplay();
+            }
+        }
+
+        // Scientific Operations
+        function handleScientific(op) {
+            let val = parseFloat(currentInput);
+            let res = 0;
+            switch(op) {
+                case 'sin': res = Math.sin(val); break;
+                case 'cos': res = Math.cos(val); break;
+                case 'tan': res = Math.tan(val); break;
+                case 'log': res = Math.log10(val); break;
+                case 'ln': res = Math.log(val); break;
+                case 'sqrt': res = Math.sqrt(val); break;
+                case 'pow': res = Math.pow(val, 2); break;
+                case 'pi': currentInput = Math.PI.toString(); updateDisplay(); return;
+                case 'e': currentInput = Math.E.toString(); updateDisplay(); return;
+            }
+            currentInput = (Math.round(res * 1e8) / 1e8).toString();
+            updateDisplay();
+        }
+
+        // Backspace
+        function handleBackspace() {
+            if (currentInput.length > 1) {
+                currentInput = currentInput.slice(0, -1);
+            } else {
+                currentInput = '0';
+            }
+            updateDisplay();
+        }
+
+        // History Management
+        function saveHistory(expr, res) {
+            history.unshift({ expr, res });
+            if (history.length > 20) history.pop();
+            localStorage.setItem('calc_history', JSON.stringify(history));
+            renderHistory();
+        }
+
+        function renderHistory() {
+            if (history.length === 0) {
+                historyList.innerHTML = `<div class="text-center text-gray-500 text-sm py-10">لا يوجد سجل حتى الآن</div>`;
+                return;
+            }
+            historyList.innerHTML = history.map(item => `
+                <div class="p-3 bg-white/5 hover:bg-white/10 rounded-2xl cursor-pointer transition" onclick="useHistory('${item.res}')">
+                    <div class="text-xs text-gray-400">${item.expr}</div>
+                    <div class="text-lg font-bold text-brand-blue font-mono">= ${item.res}</div>
+                </div>
+            `).join('');
+        }
+
+        window.useHistory = function(res) {
+            currentInput = res.toString();
+            updateDisplay();
+            historyDrawer.classList.add('-translate-y-full');
+        };
+
+        // Event Listeners
+        document.querySelectorAll('.btn-num').forEach(b => b.addEventListener('click', () => handleNumber(b.dataset.num)));
+        document.querySelectorAll('.btn-action').forEach(b => b.addEventListener('click', () => handleOperator(b.dataset.action)));
+        document.querySelectorAll('.btn-sci').forEach(b => b.addEventListener('click', () => handleScientific(b.dataset.op)));
+
+        document.getElementById('btn-equals').addEventListener('click', calculate);
+        document.getElementById('btn-clear').addEventListener('click', () => {
+            currentInput = '0';
+            expressionVal = '';
+            updateDisplay();
+        });
+        document.getElementById('btn-backspace').addEventListener('click', handleBackspace);
+
+        // Memory Buttons
+        document.querySelectorAll('.btn-mem').forEach(b => {
+            b.addEventListener('click', () => {
+                const action = b.dataset.mem;
+                const val = parseFloat(currentInput);
+                if (action === 'mc') memoryValue = 0;
+                if (action === 'mr') { currentInput = memoryValue.toString(); updateDisplay(); }
+                if (action === 'm+') memoryValue += val;
+                if (action === 'm-') memoryValue -= val;
+            });
+        });
+
+        // Toggle Scientific Panel
+        document.getElementById('toggle-scientific').addEventListener('click', () => {
+            isScientificOpen = !isScientificOpen;
+            scientificPanel.classList.toggle('hidden', !isScientificOpen);
+        });
+
+        // History Drawer Toggle
+        document.getElementById('toggle-history').addEventListener('click', () => {
+            historyDrawer.classList.remove('-translate-y-full');
+            renderHistory();
+        });
+        document.getElementById('close-history').addEventListener('click', () => historyDrawer.classList.add('-translate-y-full'));
+        document.getElementById('clear-history').addEventListener('click', () => {
+            history = [];
+            localStorage.removeItem('calc_history');
+            renderHistory();
+        });
+
+        // Light/Dark Theme Toggle
+        document.getElementById('toggle-theme').addEventListener('click', () => {
+            document.documentElement.classList.toggle('dark');
+            document.documentElement.classList.toggle('light');
+        });
+
+        // Swipe to Delete Gesture on Display
+        let touchStartX = 0;
+        const displayContainer = document.getElementById('display-container');
+        displayContainer.addEventListener('touchstart', e => touchStartX = e.changedTouches[0].screenX);
+        displayContainer.addEventListener('touchend', e => {
+            let touchEndX = e.changedTouches[0].screenX;
+            if (Math.abs(touchEndX - touchStartX) > 50) handleBackspace();
+        });
+
+        // Keyboard Support
+        window.addEventListener('keydown', e => {
+            if (e.key >= '0' && e.key <= '9') handleNumber(e.key);
+            if (e.key === '.') handleNumber('.');
+            if (['+', '-', '*', '/'].includes(e.key)) handleOperator(e.key);
+            if (e.key === 'Enter' || e.key === '=') calculate();
+            if (e.key === 'Backspace') handleBackspace();
+            if (e.key === 'Escape') {
+                currentInput = '0';
+                expressionVal = '';
+                updateDisplay();
+            }
+        });
+    </script>
 </body>
 </html>
