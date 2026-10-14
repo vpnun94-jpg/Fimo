@@ -4,10 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Pro Max Calculator</title>
-    <!-- PWA Settings -->
-    <meta name="theme-color" content="#090d16">
+    <meta name="theme-color" content="#080b12">
     <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     
     <!-- Tailwind CSS & Lucide Icons -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -25,7 +23,6 @@
                             gradientMid: '#4364F7',
                             gradientEnd: '#6FB1FC',
                             darkBg: '#080b12',
-                            cardBg: '#131b2e'
                         }
                     }
                 }
@@ -39,194 +36,184 @@
             -webkit-user-select: none;
             touch-action: manipulation;
             font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            overflow: hidden;
         }
 
-        /* Glassmorphism Effect */
         .glass-panel {
-            background: rgba(15, 22, 38, 0.75);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
+            background: rgba(15, 22, 38, 0.85);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
             border: 1px solid rgba(255, 255, 255, 0.08);
         }
 
         .light .glass-panel {
-            background: rgba(255, 255, 255, 0.85);
+            background: rgba(255, 255, 255, 0.9);
             border: 1px solid rgba(0, 0, 0, 0.08);
         }
 
-        /* PRO MAX Glow & Motion Effects */
         .btn-pro {
-            border-radius: 24px;
+            border-radius: 18px;
             position: relative;
             overflow: hidden;
-            transition: transform 0.15s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.2s ease, background-color 0.2s ease, border-color 0.2s ease;
+            transition: transform 0.12s ease, box-shadow 0.15s ease, background-color 0.15s ease;
             border: 1px solid rgba(255, 255, 255, 0.05);
             background: rgba(255, 255, 255, 0.04);
         }
 
-        /* 3D Dynamic Press Movement */
         .btn-pro:active, .btn-pro.btn-pressed {
-            transform: scale(0.92) translateY(3px);
+            transform: scale(0.92) translateY(2px);
         }
 
-        /* Dynamic Glow Effects when clicked */
         .btn-num:active, .btn-num.btn-pressed {
-            box-shadow: 0 0 20px rgba(255, 255, 255, 0.5), inset 0 0 10px rgba(255, 255, 255, 0.3);
-            border-color: rgba(255, 255, 255, 0.8);
-            background: rgba(255, 255, 255, 0.2) !important;
+            box-shadow: 0 0 15px rgba(255, 255, 255, 0.4);
+            border-color: rgba(255, 255, 255, 0.7);
+            background: rgba(255, 255, 255, 0.15) !important;
         }
 
         .btn-action:active, .btn-action.btn-pressed {
-            box-shadow: 0 0 25px rgba(0, 210, 255, 0.8), inset 0 0 12px rgba(0, 210, 255, 0.5);
+            box-shadow: 0 0 20px rgba(0, 210, 255, 0.7);
             border-color: #00d2ff;
-            background: rgba(0, 210, 255, 0.25) !important;
+            background: rgba(0, 210, 255, 0.2) !important;
             color: #ffffff !important;
         }
 
         .btn-danger:active, .btn-danger.btn-pressed {
-            box-shadow: 0 0 25px rgba(239, 68, 68, 0.8), inset 0 0 12px rgba(239, 68, 68, 0.5);
+            box-shadow: 0 0 20px rgba(239, 68, 68, 0.7);
             border-color: #ef4444;
-            background: rgba(239, 68, 68, 0.3) !important;
+            background: rgba(239, 68, 68, 0.25) !important;
         }
 
         .btn-equals:active, .btn-equals.btn-pressed {
-            box-shadow: 0 0 35px rgba(67, 100, 247, 0.9), 0 0 15px rgba(0, 210, 255, 0.6);
-            transform: scale(0.94) translateY(2px);
+            box-shadow: 0 0 25px rgba(67, 100, 247, 0.8);
         }
 
-        /* Light Ripple wave */
         .ripple {
             position: absolute;
             border-radius: 50%;
             transform: scale(0);
-            animation: ripple-glow 0.45s ease-out;
-            background: radial-gradient(circle, rgba(255,255,255,0.8) 0%, rgba(255,255,255,0) 70%);
+            animation: ripple-glow 0.4s ease-out;
+            background: radial-gradient(circle, rgba(255,255,255,0.7) 0%, rgba(255,255,255,0) 70%);
             pointer-events: none;
         }
 
         @keyframes ripple-glow {
-            to {
-                transform: scale(3.5);
-                opacity: 0;
-            }
+            to { transform: scale(3); opacity: 0; }
         }
 
-        /* Scrollbars */
-        ::-webkit-scrollbar { width: 4px; height: 4px; }
-        ::-webkit-scrollbar-thumb { background: rgba(255, 255, 255, 0.2); border-radius: 10px; }
+        ::-webkit-scrollbar { width: 3px; height: 3px; }
+        ::-webkit-scrollbar-thumb { background: rgba(255, 255, 255, 0.2); border-radius: 8px; }
 
-        /* Animated Result Spring */
         .result-animate {
-            animation: springUp 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            animation: springUp 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
 
         @keyframes springUp {
-            0% { transform: translateY(8px) scale(0.96); opacity: 0.6; }
+            0% { transform: translateY(6px) scale(0.97); opacity: 0.6; }
             100% { transform: translateY(0) scale(1); opacity: 1; }
         }
     </style>
 </head>
-<body class="bg-brand-darkBg light:bg-gray-100 text-white light:text-gray-900 h-screen w-screen flex justify-center items-center overflow-hidden transition-colors duration-300">
+<body class="bg-brand-darkBg light:bg-gray-100 text-white light:text-gray-900 h-screen w-screen flex justify-center items-center p-2">
 
-    <!-- App Container -->
-    <div class="relative w-full max-w-md h-full sm:h-[92vh] sm:rounded-[42px] glass-panel shadow-2xl flex flex-col justify-between p-5 overflow-hidden border-0 sm:border border-white/10">
+    <!-- App Container (Adjusted Height to fit all screens perfectly) -->
+    <div class="relative w-full max-w-sm h-full max-h-[680px] rounded-[32px] glass-panel shadow-2xl flex flex-col justify-between p-3.5 overflow-hidden border border-white/10">
         
         <!-- Top Controls Bar -->
-        <div class="flex justify-between items-center z-20 pt-2 pb-1 px-1">
-            <button id="toggle-history" class="p-2.5 rounded-2xl bg-white/5 hover:bg-white/10 active:scale-95 transition text-gray-300 light:text-gray-700">
-                <i data-lucide="clock" class="w-5 h-5"></i>
+        <div class="flex justify-between items-center z-20 px-1">
+            <button id="toggle-history" class="p-2 rounded-xl bg-white/5 hover:bg-white/10 active:scale-95 transition text-gray-300 light:text-gray-700">
+                <i data-lucide="clock" class="w-4 h-4"></i>
             </button>
 
-            <div class="flex items-center gap-2">
-                <button id="toggle-scientific" class="px-3.5 py-1.5 rounded-2xl bg-white/5 hover:bg-white/10 text-xs font-semibold text-brand-blue border border-brand-blue/30 active:scale-95 transition">
+            <div class="flex items-center gap-1.5">
+                <button id="toggle-scientific" class="px-3 py-1 rounded-xl bg-white/5 hover:bg-white/10 text-xs font-semibold text-brand-blue border border-brand-blue/30 active:scale-95 transition">
                     SCI
                 </button>
-                <button id="toggle-theme" class="p-2.5 rounded-2xl bg-white/5 hover:bg-white/10 active:scale-95 transition text-gray-300 light:text-gray-700">
-                    <i data-lucide="sun" class="w-5 h-5 hidden light:block"></i>
-                    <i data-lucide="moon" class="w-5 h-5 block light:hidden"></i>
+                <button id="toggle-theme" class="p-2 rounded-xl bg-white/5 hover:bg-white/10 active:scale-95 transition text-gray-300 light:text-gray-700">
+                    <i data-lucide="sun" class="w-4 h-4 hidden light:block"></i>
+                    <i data-lucide="moon" class="w-4 h-4 block light:hidden"></i>
                 </button>
             </div>
         </div>
 
         <!-- History Drawer -->
-        <div id="history-drawer" class="absolute inset-x-0 top-0 h-[65%] glass-panel rounded-b-[38px] z-30 transform -translate-y-full transition-transform duration-300 ease-in-out p-5 flex flex-col justify-between shadow-2xl">
-            <div class="flex justify-between items-center border-b border-white/10 pb-3">
-                <span class="font-bold text-sm tracking-wide text-brand-blue flex items-center gap-2">
-                    <i data-lucide="history" class="w-4 h-4"></i> سجل الحسابات
+        <div id="history-drawer" class="absolute inset-x-0 top-0 h-[60%] glass-panel rounded-b-[28px] z-30 transform -translate-y-full transition-transform duration-300 ease-in-out p-4 flex flex-col justify-between shadow-2xl">
+            <div class="flex justify-between items-center border-b border-white/10 pb-2">
+                <span class="font-bold text-xs text-brand-blue flex items-center gap-1.5">
+                    <i data-lucide="history" class="w-3.5 h-3.5"></i> سجل الحسابات
                 </span>
                 <button id="clear-history" class="text-xs text-red-400 hover:text-red-300 flex items-center gap-1">
-                    <i data-lucide="trash-2" class="w-3.5 h-3.5"></i> مسح
+                    <i data-lucide="trash-2" class="w-3 h-3"></i> مسح
                 </button>
             </div>
-            <div id="history-list" class="flex-1 overflow-y-auto my-3 space-y-3 text-left dir-ltr">
-                <div class="text-center text-gray-500 text-sm py-10">لا يوجد سجل حتى الآن</div>
+            <div id="history-list" class="flex-1 overflow-y-auto my-2 space-y-2 text-left dir-ltr text-sm">
+                <div class="text-center text-gray-500 py-8">لا يوجد سجل</div>
             </div>
-            <button id="close-history" class="w-full py-2.5 rounded-2xl bg-white/10 hover:bg-white/15 text-xs font-semibold">إغلاق</button>
+            <button id="close-history" class="w-full py-2 rounded-xl bg-white/10 text-xs font-semibold">إغلاق</button>
         </div>
 
         <!-- Display Area -->
-        <div class="flex-1 flex flex-col justify-end text-left px-2 py-4 dir-ltr overflow-hidden relative cursor-pointer" id="display-container">
-            <div id="expression" class="text-gray-400 light:text-gray-500 text-sm sm:text-base font-mono h-6 overflow-x-auto whitespace-nowrap scrollbar-none transition-all"></div>
-            <div id="display" class="text-4xl sm:text-5xl font-light tracking-tight text-white light:text-gray-900 truncate my-1 font-mono transition-all duration-200">
+        <div class="flex flex-col justify-end text-left px-2 py-1 dir-ltr overflow-hidden relative cursor-pointer" id="display-container">
+            <div id="expression" class="text-gray-400 light:text-gray-500 text-xs font-mono h-5 overflow-x-auto whitespace-nowrap scrollbar-none"></div>
+            <div id="display" class="text-3xl sm:text-4xl font-light tracking-tight text-white light:text-gray-900 truncate font-mono">
                 0
             </div>
         </div>
 
-        <!-- Scientific Panel -->
-        <div id="scientific-panel" class="grid grid-cols-5 gap-2 mb-2 hidden transition-all duration-300 dir-ltr">
-            <button class="btn-pro btn-action py-2.5 text-xs font-medium text-brand-blue" data-op="sin">sin</button>
-            <button class="btn-pro btn-action py-2.5 text-xs font-medium text-brand-blue" data-op="cos">cos</button>
-            <button class="btn-pro btn-action py-2.5 text-xs font-medium text-brand-blue" data-op="tan">tan</button>
-            <button class="btn-pro btn-action py-2.5 text-xs font-medium text-brand-blue" data-op="log">log</button>
-            <button class="btn-pro btn-action py-2.5 text-xs font-medium text-brand-blue" data-op="ln">ln</button>
-            <button class="btn-pro btn-num py-2.5 text-xs font-medium text-gray-300" data-op="sqrt">√</button>
-            <button class="btn-pro btn-num py-2.5 text-xs font-medium text-gray-300" data-op="pow">x²</button>
-            <button class="btn-pro btn-num py-2.5 text-xs font-medium text-gray-300" data-op="pi">π</button>
-            <button class="btn-pro btn-num py-2.5 text-xs font-medium text-gray-300" data-op="e">e</button>
-            <button class="btn-pro btn-num py-2.5 text-xs font-medium text-gray-300" data-op="fact">n!</button>
+        <!-- Scientific Panel (Compact) -->
+        <div id="scientific-panel" class="grid grid-cols-5 gap-1.5 mb-1 hidden dir-ltr">
+            <button class="btn-pro btn-action py-1.5 text-[11px] text-brand-blue" data-op="sin">sin</button>
+            <button class="btn-pro btn-action py-1.5 text-[11px] text-brand-blue" data-op="cos">cos</button>
+            <button class="btn-pro btn-action py-1.5 text-[11px] text-brand-blue" data-op="tan">tan</button>
+            <button class="btn-pro btn-action py-1.5 text-[11px] text-brand-blue" data-op="log">log</button>
+            <button class="btn-pro btn-action py-1.5 text-[11px] text-brand-blue" data-op="ln">ln</button>
+            <button class="btn-pro btn-num py-1.5 text-[11px] text-gray-300" data-op="sqrt">√</button>
+            <button class="btn-pro btn-num py-1.5 text-[11px] text-gray-300" data-op="pow">x²</button>
+            <button class="btn-pro btn-num py-1.5 text-[11px] text-gray-300" data-op="pi">π</button>
+            <button class="btn-pro btn-num py-1.5 text-[11px] text-gray-300" data-op="e">e</button>
+            <button class="btn-pro btn-num py-1.5 text-[11px] text-gray-300" data-op="fact">n!</button>
         </div>
 
         <!-- Memory Row -->
-        <div class="grid grid-cols-4 gap-2 mb-3 dir-ltr">
-            <button class="btn-pro py-1.5 text-[11px] text-gray-400 hover:text-white btn-num" data-mem="mc">MC</button>
-            <button class="btn-pro py-1.5 text-[11px] text-gray-400 hover:text-white btn-num" data-mem="mr">MR</button>
-            <button class="btn-pro py-1.5 text-[11px] text-gray-400 hover:text-white btn-num" data-mem="m+">M+</button>
-            <button class="btn-pro py-1.5 text-[11px] text-gray-400 hover:text-white btn-num" data-mem="m-">M-</button>
+        <div class="grid grid-cols-4 gap-1.5 mb-1.5 dir-ltr">
+            <button class="btn-pro py-1 text-[10px] text-gray-400 btn-num" data-mem="mc">MC</button>
+            <button class="btn-pro py-1 text-[10px] text-gray-400 btn-num" data-mem="mr">MR</button>
+            <button class="btn-pro py-1 text-[10px] text-gray-400 btn-num" data-mem="m+">M+</button>
+            <button class="btn-pro py-1 text-[10px] text-gray-400 btn-num" data-mem="m-">M-</button>
         </div>
 
-        <!-- Main Keypad Grid -->
-        <div class="grid grid-cols-4 gap-3 dir-ltr">
+        <!-- Main Keypad Grid (Compact and Visible) -->
+        <div class="grid grid-cols-4 gap-2 dir-ltr">
             <!-- Row 1 -->
-            <button class="btn-pro btn-danger h-14 text-red-400 font-semibold text-lg" id="btn-clear">C</button>
-            <button class="btn-pro btn-action h-14 text-brand-blue font-semibold text-lg" data-action="(">(</button>
-            <button class="btn-pro btn-action h-14 text-brand-blue font-semibold text-lg" data-action=")">)</button>
-            <button class="btn-pro btn-action h-14 text-brand-blue font-semibold text-xl" data-action="/">÷</button>
+            <button class="btn-pro btn-danger h-11 text-red-400 font-semibold text-base" id="btn-clear">C</button>
+            <button class="btn-pro btn-action h-11 text-brand-blue font-semibold text-base" data-action="(">(</button>
+            <button class="btn-pro btn-action h-11 text-brand-blue font-semibold text-base" data-action=")">)</button>
+            <button class="btn-pro btn-action h-11 text-brand-blue font-semibold text-lg" data-action="/">÷</button>
 
             <!-- Row 2 -->
-            <button class="btn-pro btn-num h-14 text-white light:text-gray-800 text-xl font-medium" data-num="7">7</button>
-            <button class="btn-pro btn-num h-14 text-white light:text-gray-800 text-xl font-medium" data-num="8">8</button>
-            <button class="btn-pro btn-num h-14 text-white light:text-gray-800 text-xl font-medium" data-num="9">9</button>
-            <button class="btn-pro btn-action h-14 text-brand-blue font-semibold text-xl" data-action="*">×</button>
+            <button class="btn-pro btn-num h-11 text-white light:text-gray-800 text-lg font-medium" data-num="7">7</button>
+            <button class="btn-pro btn-num h-11 text-white light:text-gray-800 text-lg font-medium" data-num="8">8</button>
+            <button class="btn-pro btn-num h-11 text-white light:text-gray-800 text-lg font-medium" data-num="9">9</button>
+            <button class="btn-pro btn-action h-11 text-brand-blue font-semibold text-lg" data-action="*">×</button>
 
             <!-- Row 3 -->
-            <button class="btn-pro btn-num h-14 text-white light:text-gray-800 text-xl font-medium" data-num="4">4</button>
-            <button class="btn-pro btn-num h-14 text-white light:text-gray-800 text-xl font-medium" data-num="5">5</button>
-            <button class="btn-pro btn-num h-14 text-white light:text-gray-800 text-xl font-medium" data-num="6">6</button>
-            <button class="btn-pro btn-action h-14 text-brand-blue font-semibold text-xl" data-action="-">-</button>
+            <button class="btn-pro btn-num h-11 text-white light:text-gray-800 text-lg font-medium" data-num="4">4</button>
+            <button class="btn-pro btn-num h-11 text-white light:text-gray-800 text-lg font-medium" data-num="5">5</button>
+            <button class="btn-pro btn-num h-11 text-white light:text-gray-800 text-lg font-medium" data-num="6">6</button>
+            <button class="btn-pro btn-action h-11 text-brand-blue font-semibold text-lg" data-action="-">-</button>
 
             <!-- Row 4 -->
-            <button class="btn-pro btn-num h-14 text-white light:text-gray-800 text-xl font-medium" data-num="1">1</button>
-            <button class="btn-pro btn-num h-14 text-white light:text-gray-800 text-xl font-medium" data-num="2">2</button>
-            <button class="btn-pro btn-num h-14 text-white light:text-gray-800 text-xl font-medium" data-num="3">3</button>
-            <button class="btn-pro btn-action h-14 text-brand-blue font-semibold text-xl" data-action="+">+</button>
+            <button class="btn-pro btn-num h-11 text-white light:text-gray-800 text-lg font-medium" data-num="1">1</button>
+            <button class="btn-pro btn-num h-11 text-white light:text-gray-800 text-lg font-medium" data-num="2">2</button>
+            <button class="btn-pro btn-num h-11 text-white light:text-gray-800 text-lg font-medium" data-num="3">3</button>
+            <button class="btn-pro btn-action h-11 text-brand-blue font-semibold text-lg" data-action="+">+</button>
 
-            <!-- Row 5 -->
-            <button class="btn-pro btn-num h-14 text-white light:text-gray-800 text-xl font-medium" data-num="0">0</button>
-            <button class="btn-pro btn-num h-14 text-white light:text-gray-800 text-xl font-medium" data-num=".">.</button>
-            <button class="btn-pro btn-danger h-14 text-gray-300 text-lg flex items-center justify-center" id="btn-backspace">
-                <i data-lucide="delete" class="w-5 h-5"></i>
+            <!-- Row 5 (0, ., Backspace, =) -->
+            <button class="btn-pro btn-num h-11 text-white light:text-gray-800 text-lg font-medium" data-num="0">0</button>
+            <button class="btn-pro btn-num h-11 text-white light:text-gray-800 text-lg font-medium" data-num=".">.</button>
+            <button class="btn-pro btn-danger h-11 text-gray-300 flex items-center justify-center" id="btn-backspace">
+                <i data-lucide="delete" class="w-4 h-4"></i>
             </button>
-            <button class="btn-pro btn-equals h-14 bg-gradient-to-r from-brand-gradientStart via-brand-gradientMid to-brand-gradientEnd text-white font-bold text-2xl" id="btn-equals">=</button>
+            <button class="btn-pro btn-equals h-11 bg-gradient-to-r from-brand-gradientStart via-brand-gradientMid to-brand-gradientEnd text-white font-bold text-xl shadow-md" id="btn-equals">=</button>
         </div>
     </div>
 
@@ -250,12 +237,9 @@
             if ('vibrate' in navigator) navigator.vibrate(20);
         }
 
-        // Add Light Glow & Ripple on Click
         document.querySelectorAll('.btn-pro').forEach(button => {
             button.addEventListener('pointerdown', function (e) {
                 triggerHaptic();
-                
-                // Add Ripple Effect
                 const circle = document.createElement('span');
                 const diameter = Math.max(button.clientWidth, button.clientHeight);
                 const radius = diameter / 2;
@@ -285,9 +269,9 @@
             expression.innerText = expressionVal;
             
             const len = display.innerText.length;
-            if (len > 12) display.style.fontSize = '1.8rem';
-            else if (len > 8) display.style.fontSize = '2.5rem';
-            else display.style.fontSize = '3rem';
+            if (len > 12) display.style.fontSize = '1.5rem';
+            else if (len > 8) display.style.fontSize = '2rem';
+            else display.style.fontSize = '2.5rem';
         }
 
         function handleNumber(num) {
@@ -318,7 +302,7 @@
                 saveHistory(fullExpression, result);
 
                 display.classList.add('result-animate');
-                setTimeout(() => display.classList.remove('result-animate'), 300);
+                setTimeout(() => display.classList.remove('result-animate'), 200);
 
                 currentInput = result.toString();
                 expressionVal = '';
@@ -361,13 +345,13 @@
 
         function renderHistory() {
             if (history.length === 0) {
-                historyList.innerHTML = `<div class="text-center text-gray-500 text-sm py-10">لا يوجد سجل حتى الآن</div>`;
+                historyList.innerHTML = `<div class="text-center text-gray-500 py-8">لا يوجد سجل</div>`;
                 return;
             }
             historyList.innerHTML = history.map(item => `
-                <div class="p-3 bg-white/5 hover:bg-white/10 rounded-2xl cursor-pointer transition" onclick="useHistory('${item.res}')">
-                    <div class="text-xs text-gray-400">${item.expr}</div>
-                    <div class="text-lg font-bold text-brand-blue font-mono">= ${item.res}</div>
+                <div class="p-2.5 bg-white/5 hover:bg-white/10 rounded-xl cursor-pointer transition" onclick="useHistory('${item.res}')">
+                    <div class="text-[11px] text-gray-400">${item.expr}</div>
+                    <div class="text-sm font-bold text-brand-blue font-mono">= ${item.res}</div>
                 </div>
             `).join('');
         }
@@ -378,7 +362,6 @@
             historyDrawer.classList.add('-translate-y-full');
         };
 
-        // Click Bindings
         document.querySelectorAll('.btn-num[data-num]').forEach(b => b.addEventListener('click', () => handleNumber(b.dataset.num)));
         document.querySelectorAll('.btn-action[data-action]').forEach(b => b.addEventListener('click', () => handleOperator(b.dataset.action)));
         document.querySelectorAll('.btn-pro[data-op]').forEach(b => b.addEventListener('click', () => handleScientific(b.dataset.op)));
@@ -421,25 +404,6 @@
         document.getElementById('toggle-theme').addEventListener('click', () => {
             document.documentElement.classList.toggle('dark');
             document.documentElement.classList.toggle('light');
-        });
-
-        // Keyboard Support with Glow Effect Trigger
-        window.addEventListener('keydown', e => {
-            let selector = '';
-            if (e.key >= '0' && e.key <= '9') { handleNumber(e.key); selector = `[data-num="${e.key}"]`; }
-            if (e.key === '.') { handleNumber('.'); selector = `[data-num="."]`; }
-            if (['+', '-', '*', '/'].includes(e.key)) { handleOperator(e.key); selector = `[data-action="${e.key}"]`; }
-            if (e.key === 'Enter' || e.key === '=') { calculate(); selector = `#btn-equals`; }
-            if (e.key === 'Backspace') { handleBackspace(); selector = `#btn-backspace`; }
-            if (e.key === 'Escape') { currentInput = '0'; expressionVal = ''; updateDisplay(); selector = `#btn-clear`; }
-
-            if (selector) {
-                const btn = document.querySelector(selector);
-                if (btn) {
-                    btn.classList.add('btn-pressed');
-                    setTimeout(() => btn.classList.remove('btn-pressed'), 200);
-                }
-            }
         });
     </script>
 </body>
