@@ -21,8 +21,7 @@
                             bg: '#050811',
                             blue: '#00f2ff',
                             neonPink: '#ff007f',
-                            purple: '#7928ca',
-                            panel: 'rgba(10, 15, 30, 0.85)'
+                            purple: '#7928ca'
                         }
                     }
                 }
@@ -48,13 +47,12 @@
             background-color: #050811;
         }
 
-        /* Glass Refraction & Holographic HUD Panel */
         .glass-hud {
-            background: linear-gradient(135deg, rgba(15, 23, 42, 0.8), rgba(5, 8, 17, 0.9));
+            background: linear-gradient(135deg, rgba(15, 23, 42, 0.85), rgba(5, 8, 17, 0.95));
             backdrop-filter: blur(20px);
             -webkit-backdrop-filter: blur(20px);
             border: 1px solid rgba(0, 242, 255, 0.15);
-            box-shadow: 0 0 40px rgba(0, 0, 0, 0.8), inset 0 0 20px rgba(0, 242, 255, 0.05);
+            box-shadow: 0 0 40px rgba(0, 0, 0, 0.8);
         }
 
         .light .glass-hud {
@@ -62,7 +60,6 @@
             border: 1px solid rgba(0, 0, 0, 0.1);
         }
 
-        /* Animated Border Beam & Conic Gradient Conic Rotation */
         @keyframes borderBeam {
             0% { border-color: rgba(0, 242, 255, 0.3); }
             50% { border-color: rgba(255, 0, 127, 0.6); }
@@ -73,12 +70,11 @@
             animation: borderBeam 4s infinite ease-in-out;
         }
 
-        /* 3D Tactile Press & Spring Physics Bounce */
         .btn-cyber {
             border-radius: 16px;
             position: relative;
             overflow: hidden;
-            transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.2s ease, background 0.2s ease;
+            transition: transform 0.15s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.2s ease, background 0.2s ease;
             border: 1px solid rgba(255, 255, 255, 0.08);
             background: rgba(255, 255, 255, 0.03);
             backdrop-filter: blur(10px);
@@ -88,7 +84,6 @@
             transform: scale(0.88) translateY(3px);
         }
 
-        /* Neon Ripple Wave & RGB Edge Glow on Press */
         .btn-num:active, .btn-num.btn-pressed {
             box-shadow: 0 0 25px rgba(0, 242, 255, 0.7), inset 0 0 10px rgba(0, 242, 255, 0.4);
             border-color: #00f2ff;
@@ -108,12 +103,6 @@
             background: rgba(255, 0, 127, 0.25) !important;
         }
 
-        .btn-equals:active, .btn-equals.btn-pressed {
-            box-shadow: 0 0 35px rgba(0, 242, 255, 0.9), 0 0 15px rgba(255, 0, 127, 0.6);
-            border-color: #00f2ff;
-        }
-
-        /* Neon Ripple Wave Effect */
         .ripple {
             position: absolute;
             border-radius: 50%;
@@ -127,7 +116,6 @@
             to { transform: scale(4); opacity: 0; }
         }
 
-        /* Canvas Particle System Layer */
         #particle-canvas {
             position: absolute;
             inset: 0;
@@ -150,10 +138,8 @@
 </head>
 <body class="flex justify-center items-center relative overflow-hidden">
 
-    <!-- Quantum Canvas Particle System -->
     <canvas id="particle-canvas"></canvas>
 
-    <!-- App Container (Cyberpunk HUD Interface) -->
     <div class="relative w-full h-full glass-hud hud-border flex flex-col justify-between p-3 overflow-hidden text-white light:text-gray-900 transition-colors duration-300 z-20">
         
         <!-- Top Controls Bar -->
@@ -255,11 +241,10 @@
         </div>
     </div>
 
-    <!-- Script Logic & Quantum Canvas Particle System -->
+    <!-- Script Logic -->
     <script>
         lucide.createIcons();
 
-        // Canvas Particle System Engine
         const canvas = document.getElementById('particle-canvas');
         const ctx = canvas.getContext('2d');
         let particles = [];
@@ -316,8 +301,8 @@
         }
         animateParticles();
 
+        let fullExpression = '';
         let currentInput = '0';
-        let expressionVal = '';
         let memoryValue = 0;
         let history = JSON.parse(localStorage.getItem('calc_history') || '[]');
         let isScientificOpen = false;
@@ -354,55 +339,44 @@
             });
         });
 
-        function formatNumber(numStr) {
-            if (numStr === 'Error' || numStr === 'Infinity') return numStr;
-            const num = parseFloat(numStr);
-            if (isNaN(num)) return numStr;
-            return new Intl.NumberFormat('en-US', { maximumFractionDigits: 8 }).format(num);
-        }
-
         function updateDisplay() {
-            display.innerText = formatNumber(currentInput);
-            expression.innerText = expressionVal;
-            
-            const len = display.innerText.length;
-            if (len > 12) display.style.fontSize = '1.8rem';
-            else if (len > 8) display.style.fontSize = '2.4rem';
-            else display.style.fontSize = '3rem';
+            display.innerText = currentInput;
+            expression.innerText = fullExpression;
         }
 
-        function handleNumber(num) {
-            if (currentInput === '0' && num !== '.') currentInput = num;
-            else if (num === '.' && currentInput.includes('.')) return;
-            else currentInput += num;
+        function handleInput(val) {
+            if (currentInput === '0' && val !== '.' && !['+', '-', '*', '/', '×', '÷'].includes(val)) {
+                currentInput = val;
+            } else {
+                currentInput += val;
+            }
             updateDisplay();
         }
 
         function handleOperator(op) {
-            expressionVal += ` ${currentInput} ${op}`;
-            currentInput = '0';
+            currentInput += ` ${op} `;
             updateDisplay();
         }
 
         function calculate() {
             try {
-                let fullExpression = expressionVal + ' ' + currentInput;
-                let sanitizedExpr = fullExpression
+                let expressionStr = currentInput
                     .replace(/×/g, '*')
                     .replace(/÷/g, '/')
                     .replace(/π/g, Math.PI)
                     .replace(/e/g, Math.E);
 
-                let result = eval(sanitizedExpr);
+                let result = eval(expressionStr);
                 result = Math.round(result * 1e8) / 1e8;
 
-                saveHistory(fullExpression, result);
+                saveHistory(currentInput, result);
+
+                fullExpression = currentInput + ' =';
+                currentInput = result.toString();
 
                 display.classList.add('result-animate');
                 setTimeout(() => display.classList.remove('result-animate'), 250);
 
-                currentInput = result.toString();
-                expressionVal = '';
                 updateDisplay();
             } catch (err) {
                 currentInput = 'Error';
@@ -429,7 +403,13 @@
         }
 
         function handleBackspace() {
-            currentInput = currentInput.length > 1 ? currentInput.slice(0, -1) : '0';
+            if (currentInput.length > 1) {
+                currentInput = currentInput.trim();
+                currentInput = currentInput.slice(0, -1).trim();
+                if (currentInput === '') currentInput = '0';
+            } else {
+                currentInput = '0';
+            }
             updateDisplay();
         }
 
@@ -459,14 +439,21 @@
             historyDrawer.classList.add('-translate-y-full');
         };
 
-        document.querySelectorAll('.btn-num[data-num]').forEach(b => b.addEventListener('click', () => handleNumber(b.dataset.num)));
-        document.querySelectorAll('.btn-action[data-action]').forEach(b => b.addEventListener('click', () => handleOperator(b.dataset.action)));
+        // Events
+        document.querySelectorAll('.btn-num[data-num]').forEach(b => b.addEventListener('click', () => handleInput(b.dataset.num)));
+        document.querySelectorAll('.btn-action[data-action]').forEach(b => b.addEventListener('click', () => {
+            let act = b.dataset.action;
+            if(['+', '-', '*', '/', '(', ')'].includes(act)) {
+                handleInput(` ${act} `);
+            }
+        }));
+        
         document.querySelectorAll('.btn-cyber[data-op]').forEach(b => b.addEventListener('click', () => handleScientific(b.dataset.op)));
 
         document.getElementById('btn-equals').addEventListener('click', calculate);
         document.getElementById('btn-clear').addEventListener('click', () => {
             currentInput = '0';
-            expressionVal = '';
+            fullExpression = '';
             updateDisplay();
         });
         document.getElementById('btn-backspace').addEventListener('click', handleBackspace);
