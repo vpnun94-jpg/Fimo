@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Pro Max Calculator</title>
-    <meta name="theme-color" content="#080b12">
+    <title>Quantum Cyber Pro Max Calculator</title>
+    <meta name="theme-color" content="#050811">
     <meta name="apple-mobile-web-app-capable" content="yes">
     
     <!-- Tailwind CSS & Lucide Icons -->
@@ -17,12 +17,12 @@
             theme: {
                 extend: {
                     colors: {
-                        brand: {
-                            blue: '#00d2ff',
-                            gradientStart: '#0052D4',
-                            gradientMid: '#4364F7',
-                            gradientEnd: '#6FB1FC',
-                            darkBg: '#080b12',
+                        cyber: {
+                            bg: '#050811',
+                            blue: '#00f2ff',
+                            neonPink: '#ff007f',
+                            purple: '#7928ca',
+                            panel: 'rgba(10, 15, 30, 0.85)'
                         }
                     }
                 }
@@ -45,97 +45,128 @@
             -webkit-user-select: none;
             touch-action: manipulation;
             font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            background-color: #080b12;
+            background-color: #050811;
         }
 
-        .glass-panel {
-            background: rgba(15, 22, 38, 0.9);
-            backdrop-filter: blur(15px);
-            -webkit-backdrop-filter: blur(15px);
+        /* Glass Refraction & Holographic HUD Panel */
+        .glass-hud {
+            background: linear-gradient(135deg, rgba(15, 23, 42, 0.8), rgba(5, 8, 17, 0.9));
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(0, 242, 255, 0.15);
+            box-shadow: 0 0 40px rgba(0, 0, 0, 0.8), inset 0 0 20px rgba(0, 242, 255, 0.05);
         }
 
-        .light .glass-panel {
-            background: rgba(255, 255, 255, 0.95);
+        .light .glass-hud {
+            background: rgba(255, 255, 255, 0.92);
+            border: 1px solid rgba(0, 0, 0, 0.1);
         }
 
-        .btn-pro {
+        /* Animated Border Beam & Conic Gradient Conic Rotation */
+        @keyframes borderBeam {
+            0% { border-color: rgba(0, 242, 255, 0.3); }
+            50% { border-color: rgba(255, 0, 127, 0.6); }
+            100% { border-color: rgba(0, 242, 255, 0.3); }
+        }
+
+        .hud-border {
+            animation: borderBeam 4s infinite ease-in-out;
+        }
+
+        /* 3D Tactile Press & Spring Physics Bounce */
+        .btn-cyber {
             border-radius: 16px;
             position: relative;
             overflow: hidden;
-            transition: transform 0.1s ease, box-shadow 0.15s ease, background-color 0.15s ease;
-            border: 1px solid rgba(255, 255, 255, 0.06);
-            background: rgba(255, 255, 255, 0.04);
+            transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.2s ease, background 0.2s ease;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(10px);
         }
 
-        .btn-pro:active, .btn-pro.btn-pressed {
-            transform: scale(0.91) translateY(2px);
+        .btn-cyber:active, .btn-cyber.btn-pressed {
+            transform: scale(0.88) translateY(3px);
         }
 
+        /* Neon Ripple Wave & RGB Edge Glow on Press */
         .btn-num:active, .btn-num.btn-pressed {
-            box-shadow: 0 0 15px rgba(255, 255, 255, 0.5);
-            border-color: rgba(255, 255, 255, 0.8);
-            background: rgba(255, 255, 255, 0.18) !important;
+            box-shadow: 0 0 25px rgba(0, 242, 255, 0.7), inset 0 0 10px rgba(0, 242, 255, 0.4);
+            border-color: #00f2ff;
+            background: rgba(0, 242, 255, 0.15) !important;
         }
 
         .btn-action:active, .btn-action.btn-pressed {
-            box-shadow: 0 0 20px rgba(0, 210, 255, 0.8);
-            border-color: #00d2ff;
-            background: rgba(0, 210, 255, 0.25) !important;
-            color: #ffffff !important;
+            box-shadow: 0 0 30px rgba(121, 40, 202, 0.8), inset 0 0 12px rgba(121, 40, 202, 0.5);
+            border-color: #7928ca;
+            background: rgba(121, 40, 202, 0.25) !important;
+            color: #fff !important;
         }
 
         .btn-danger:active, .btn-danger.btn-pressed {
-            box-shadow: 0 0 20px rgba(239, 68, 68, 0.8);
-            border-color: #ef4444;
-            background: rgba(239, 68, 68, 0.3) !important;
+            box-shadow: 0 0 30px rgba(255, 0, 127, 0.8), inset 0 0 12px rgba(255, 0, 127, 0.5);
+            border-color: #ff007f;
+            background: rgba(255, 0, 127, 0.25) !important;
         }
 
         .btn-equals:active, .btn-equals.btn-pressed {
-            box-shadow: 0 0 25px rgba(67, 100, 247, 0.9);
+            box-shadow: 0 0 35px rgba(0, 242, 255, 0.9), 0 0 15px rgba(255, 0, 127, 0.6);
+            border-color: #00f2ff;
         }
 
+        /* Neon Ripple Wave Effect */
         .ripple {
             position: absolute;
             border-radius: 50%;
             transform: scale(0);
-            animation: ripple-glow 0.35s ease-out;
-            background: radial-gradient(circle, rgba(255,255,255,0.7) 0%, rgba(255,255,255,0) 70%);
+            animation: plasmaRipple 0.5s cubic-bezier(0.25, 1, 0.5, 1);
+            background: radial-gradient(circle, rgba(0,242,255,0.8) 0%, rgba(255,0,127,0.4) 40%, transparent 70%);
             pointer-events: none;
         }
 
-        @keyframes ripple-glow {
-            to { transform: scale(3); opacity: 0; }
+        @keyframes plasmaRipple {
+            to { transform: scale(4); opacity: 0; }
+        }
+
+        /* Canvas Particle System Layer */
+        #particle-canvas {
+            position: absolute;
+            inset: 0;
+            pointer-events: none;
+            z-index: 10;
         }
 
         ::-webkit-scrollbar { width: 3px; height: 3px; }
-        ::-webkit-scrollbar-thumb { background: rgba(255, 255, 255, 0.2); border-radius: 8px; }
+        ::-webkit-scrollbar-thumb { background: rgba(0, 242, 255, 0.3); border-radius: 8px; }
 
         .result-animate {
-            animation: springUp 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            animation: springUp 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
 
         @keyframes springUp {
-            0% { transform: translateY(6px) scale(0.97); opacity: 0.6; }
-            100% { transform: translateY(0) scale(1); opacity: 1; }
+            0% { transform: translateY(8px) scale(0.95); opacity: 0.5; filter: blur(4px); }
+            100% { transform: translateY(0) scale(1); opacity: 1; filter: blur(0); }
         }
     </style>
 </head>
-<body class="flex justify-center items-center">
+<body class="flex justify-center items-center relative overflow-hidden">
 
-    <!-- App Container (Exact Full Screen Fit) -->
-    <div class="relative w-full h-full glass-panel flex flex-col justify-between p-3 overflow-hidden text-white light:text-gray-900 transition-colors duration-300">
+    <!-- Quantum Canvas Particle System -->
+    <canvas id="particle-canvas"></canvas>
+
+    <!-- App Container (Cyberpunk HUD Interface) -->
+    <div class="relative w-full h-full glass-hud hud-border flex flex-col justify-between p-3 overflow-hidden text-white light:text-gray-900 transition-colors duration-300 z-20">
         
         <!-- Top Controls Bar -->
         <div class="flex justify-between items-center z-20 px-1 pt-1">
-            <button id="toggle-history" class="p-2 rounded-xl bg-white/5 hover:bg-white/10 active:scale-95 transition text-gray-300 light:text-gray-700">
+            <button id="toggle-history" class="p-2 rounded-xl bg-white/5 hover:bg-white/15 active:scale-95 transition text-cyber-blue border border-cyber-blue/20">
                 <i data-lucide="clock" class="w-4 h-4"></i>
             </button>
 
             <div class="flex items-center gap-1.5">
-                <button id="toggle-scientific" class="px-3 py-1 rounded-xl bg-white/5 hover:bg-white/10 text-xs font-semibold text-brand-blue border border-brand-blue/30 active:scale-95 transition">
+                <button id="toggle-scientific" class="px-3 py-1 rounded-xl bg-white/5 hover:bg-white/15 text-xs font-semibold text-cyber-blue border border-cyber-blue/30 active:scale-95 transition shadow-[0_0_10px_rgba(0,242,255,0.2)]">
                     SCI
                 </button>
-                <button id="toggle-theme" class="p-2 rounded-xl bg-white/5 hover:bg-white/10 active:scale-95 transition text-gray-300 light:text-gray-700">
+                <button id="toggle-theme" class="p-2 rounded-xl bg-white/5 hover:bg-white/15 active:scale-95 transition text-cyber-blue border border-cyber-blue/20">
                     <i data-lucide="sun" class="w-4 h-4 hidden light:block"></i>
                     <i data-lucide="moon" class="w-4 h-4 block light:hidden"></i>
                 </button>
@@ -143,90 +174,147 @@
         </div>
 
         <!-- History Drawer -->
-        <div id="history-drawer" class="absolute inset-x-0 top-0 h-[65%] glass-panel rounded-b-3xl z-30 transform -translate-y-full transition-transform duration-300 ease-in-out p-4 flex flex-col justify-between shadow-2xl border-b border-white/10">
+        <div id="history-drawer" class="absolute inset-x-0 top-0 h-[65%] glass-hud rounded-b-3xl z-40 transform -translate-y-full transition-transform duration-300 ease-in-out p-4 flex flex-col justify-between shadow-2xl border-b border-cyber-blue/30">
             <div class="flex justify-between items-center border-b border-white/10 pb-2">
-                <span class="font-bold text-xs text-brand-blue flex items-center gap-1.5">
-                    <i data-lucide="history" class="w-3.5 h-3.5"></i> سجل الحسابات
+                <span class="font-bold text-xs text-cyber-blue flex items-center gap-1.5">
+                    <i data-lucide="history" class="w-3.5 h-3.5"></i> سجل الحسابات الكمومي
                 </span>
-                <button id="clear-history" class="text-xs text-red-400 hover:text-red-300 flex items-center gap-1">
+                <button id="clear-history" class="text-xs text-cyber-pink hover:text-pink-300 flex items-center gap-1">
                     <i data-lucide="trash-2" class="w-3 h-3"></i> مسح
                 </button>
             </div>
             <div id="history-list" class="flex-1 overflow-y-auto my-2 space-y-2 text-left dir-ltr text-sm">
                 <div class="text-center text-gray-500 py-8">لا يوجد سجل</div>
             </div>
-            <button id="close-history" class="w-full py-2 rounded-xl bg-white/10 text-xs font-semibold">إغلاق</button>
+            <button id="close-history" class="w-full py-2 rounded-xl bg-cyber-blue/20 text-cyber-blue text-xs font-semibold border border-cyber-blue/30">إغلاق</button>
         </div>
 
         <!-- Display Area -->
         <div class="flex flex-col justify-end text-left px-2 py-2 dir-ltr overflow-hidden relative cursor-pointer" id="display-container">
-            <div id="expression" class="text-gray-400 light:text-gray-500 text-xs font-mono h-5 overflow-x-auto whitespace-nowrap scrollbar-none"></div>
-            <div id="display" class="text-4xl font-light tracking-tight text-white light:text-gray-900 truncate font-mono">
+            <div id="expression" class="text-cyber-blue/70 text-xs font-mono h-5 overflow-x-auto whitespace-nowrap scrollbar-none"></div>
+            <div id="display" class="text-4xl font-light tracking-tight text-white light:text-gray-900 truncate font-mono drop-shadow-[0_0_15px_rgba(0,242,255,0.4)]">
                 0
             </div>
         </div>
 
-        <!-- Scientific Panel (Compact Fit) -->
+        <!-- Scientific Panel -->
         <div id="scientific-panel" class="grid grid-cols-5 gap-1.5 mb-1 hidden dir-ltr">
-            <button class="btn-pro btn-action py-2 text-[11px] text-brand-blue" data-op="sin">sin</button>
-            <button class="btn-pro btn-action py-2 text-[11px] text-brand-blue" data-op="cos">cos</button>
-            <button class="btn-pro btn-action py-2 text-[11px] text-brand-blue" data-op="tan">tan</button>
-            <button class="btn-pro btn-action py-2 text-[11px] text-brand-blue" data-op="log">log</button>
-            <button class="btn-pro btn-action py-2 text-[11px] text-brand-blue" data-op="ln">ln</button>
-            <button class="btn-pro btn-num py-2 text-[11px] text-gray-300" data-op="sqrt">√</button>
-            <button class="btn-pro btn-num py-2 text-[11px] text-gray-300" data-op="pow">x²</button>
-            <button class="btn-pro btn-num py-2 text-[11px] text-gray-300" data-op="pi">π</button>
-            <button class="btn-pro btn-num py-2 text-[11px] text-gray-300" data-op="e">e</button>
-            <button class="btn-pro btn-num py-2 text-[11px] text-gray-300" data-op="fact">n!</button>
+            <button class="btn-cyber btn-action py-2 text-[11px] text-cyber-blue" data-op="sin">sin</button>
+            <button class="btn-cyber btn-action py-2 text-[11px] text-cyber-blue" data-op="cos">cos</button>
+            <button class="btn-cyber btn-action py-2 text-[11px] text-cyber-blue" data-op="tan">tan</button>
+            <button class="btn-cyber btn-action py-2 text-[11px] text-cyber-blue" data-op="log">log</button>
+            <button class="btn-cyber btn-action py-2 text-[11px] text-cyber-blue" data-op="ln">ln</button>
+            <button class="btn-cyber btn-num py-2 text-[11px] text-gray-300" data-op="sqrt">√</button>
+            <button class="btn-cyber btn-num py-2 text-[11px] text-gray-300" data-op="pow">x²</button>
+            <button class="btn-cyber btn-num py-2 text-[11px] text-gray-300" data-op="pi">π</button>
+            <button class="btn-cyber btn-num py-2 text-[11px] text-gray-300" data-op="e">e</button>
+            <button class="btn-cyber btn-num py-2 text-[11px] text-gray-300" data-op="fact">n!</button>
         </div>
 
         <!-- Memory Row -->
         <div class="grid grid-cols-4 gap-1.5 mb-2 dir-ltr">
-            <button class="btn-pro py-1.5 text-[11px] text-gray-400 btn-num" data-mem="mc">MC</button>
-            <button class="btn-pro py-1.5 text-[11px] text-gray-400 btn-num" data-mem="mr">MR</button>
-            <button class="btn-pro py-1.5 text-[11px] text-gray-400 btn-num" data-mem="m+">M+</button>
-            <button class="btn-pro py-1.5 text-[11px] text-gray-400 btn-num" data-mem="m-">M-</button>
+            <button class="btn-cyber py-1.5 text-[11px] text-gray-400 btn-num" data-mem="mc">MC</button>
+            <button class="btn-cyber py-1.5 text-[11px] text-gray-400 btn-num" data-mem="mr">MR</button>
+            <button class="btn-cyber py-1.5 text-[11px] text-gray-400 btn-num" data-mem="m+">M+</button>
+            <button class="btn-cyber py-1.5 text-[11px] text-gray-400 btn-num" data-mem="m-">M-</button>
         </div>
 
-        <!-- Main Keypad Grid (Optimized Flex Height) -->
+        <!-- Main Keypad Grid -->
         <div class="grid grid-cols-4 gap-2.5 dir-ltr pb-2">
             <!-- Row 1 -->
-            <button class="btn-pro btn-danger h-12 text-red-400 font-semibold text-lg" id="btn-clear">C</button>
-            <button class="btn-pro btn-action h-12 text-brand-blue font-semibold text-lg" data-action="(">(</button>
-            <button class="btn-pro btn-action h-12 text-brand-blue font-semibold text-lg" data-action=")">)</button>
-            <button class="btn-pro btn-action h-12 text-brand-blue font-semibold text-xl" data-action="/">÷</button>
+            <button class="btn-cyber btn-danger h-12 text-cyber-pink font-semibold text-lg" id="btn-clear">C</button>
+            <button class="btn-cyber btn-action h-12 text-cyber-blue font-semibold text-lg" data-action="(">(</button>
+            <button class="btn-cyber btn-action h-12 text-cyber-blue font-semibold text-lg" data-action=")">)</button>
+            <button class="btn-cyber btn-action h-12 text-cyber-blue font-semibold text-xl" data-action="/">÷</button>
 
             <!-- Row 2 -->
-            <button class="btn-pro btn-num h-12 text-white light:text-gray-800 text-xl font-medium" data-num="7">7</button>
-            <button class="btn-pro btn-num h-12 text-white light:text-gray-800 text-xl font-medium" data-num="8">8</button>
-            <button class="btn-pro btn-num h-12 text-white light:text-gray-800 text-xl font-medium" data-num="9">9</button>
-            <button class="btn-pro btn-action h-12 text-brand-blue font-semibold text-xl" data-action="*">×</button>
+            <button class="btn-cyber btn-num h-12 text-white light:text-gray-800 text-xl font-medium" data-num="7">7</button>
+            <button class="btn-cyber btn-num h-12 text-white light:text-gray-800 text-xl font-medium" data-num="8">8</button>
+            <button class="btn-cyber btn-num h-12 text-white light:text-gray-800 text-xl font-medium" data-num="9">9</button>
+            <button class="btn-cyber btn-action h-12 text-cyber-blue font-semibold text-xl" data-action="*">×</button>
 
             <!-- Row 3 -->
-            <button class="btn-pro btn-num h-12 text-white light:text-gray-800 text-xl font-medium" data-num="4">4</button>
-            <button class="btn-pro btn-num h-12 text-white light:text-gray-800 text-xl font-medium" data-num="5">5</button>
-            <button class="btn-pro btn-num h-12 text-white light:text-gray-800 text-xl font-medium" data-num="6">6</button>
-            <button class="btn-pro btn-action h-12 text-brand-blue font-semibold text-xl" data-action="-">-</button>
+            <button class="btn-cyber btn-num h-12 text-white light:text-gray-800 text-xl font-medium" data-num="4">4</button>
+            <button class="btn-cyber btn-num h-12 text-white light:text-gray-800 text-xl font-medium" data-num="5">5</button>
+            <button class="btn-cyber btn-num h-12 text-white light:text-gray-800 text-xl font-medium" data-num="6">6</button>
+            <button class="btn-cyber btn-action h-12 text-cyber-blue font-semibold text-xl" data-action="-">-</button>
 
             <!-- Row 4 -->
-            <button class="btn-pro btn-num h-12 text-white light:text-gray-800 text-xl font-medium" data-num="1">1</button>
-            <button class="btn-pro btn-num h-12 text-white light:text-gray-800 text-xl font-medium" data-num="2">2</button>
-            <button class="btn-pro btn-num h-12 text-white light:text-gray-800 text-xl font-medium" data-num="3">3</button>
-            <button class="btn-pro btn-action h-12 text-brand-blue font-semibold text-xl" data-action="+">+</button>
+            <button class="btn-cyber btn-num h-12 text-white light:text-gray-800 text-xl font-medium" data-num="1">1</button>
+            <button class="btn-cyber btn-num h-12 text-white light:text-gray-800 text-xl font-medium" data-num="2">2</button>
+            <button class="btn-cyber btn-num h-12 text-white light:text-gray-800 text-xl font-medium" data-num="3">3</button>
+            <button class="btn-cyber btn-action h-12 text-cyber-blue font-semibold text-xl" data-action="+">+</button>
 
             <!-- Row 5 -->
-            <button class="btn-pro btn-num h-12 text-white light:text-gray-800 text-xl font-medium" data-num="0">0</button>
-            <button class="btn-pro btn-num h-12 text-white light:text-gray-800 text-xl font-medium" data-num=".">.</button>
-            <button class="btn-pro btn-danger h-12 text-gray-300 flex items-center justify-center" id="btn-backspace">
+            <button class="btn-cyber btn-num h-12 text-white light:text-gray-800 text-xl font-medium" data-num="0">0</button>
+            <button class="btn-cyber btn-num h-12 text-white light:text-gray-800 text-xl font-medium" data-num=".">.</button>
+            <button class="btn-cyber btn-danger h-12 text-gray-300 flex items-center justify-center" id="btn-backspace">
                 <i data-lucide="delete" class="w-5 h-5"></i>
             </button>
-            <button class="btn-pro btn-equals h-12 bg-gradient-to-r from-brand-gradientStart via-brand-gradientMid to-brand-gradientEnd text-white font-bold text-2xl shadow-lg" id="btn-equals">=</button>
+            <button class="btn-cyber btn-equals btn-action h-12 bg-gradient-to-r from-cyber-blue to-cyber-purple text-white font-bold text-2xl shadow-[0_0_20px_rgba(0,242,255,0.4)]" id="btn-equals">=</button>
         </div>
     </div>
 
-    <!-- Script Logic -->
+    <!-- Script Logic & Quantum Canvas Particle System -->
     <script>
         lucide.createIcons();
+
+        // Canvas Particle System Engine
+        const canvas = document.getElementById('particle-canvas');
+        const ctx = canvas.getContext('2d');
+        let particles = [];
+
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+        window.addEventListener('resize', resizeCanvas);
+        resizeCanvas();
+
+        class QuantumParticle {
+            constructor(x, y) {
+                this.x = x;
+                this.y = y;
+                this.size = Math.random() * 3 + 1;
+                this.speedX = (Math.random() - 0.5) * 4;
+                this.speedY = (Math.random() - 0.5) * 4;
+                this.color = Math.random() > 0.5 ? '#00f2ff' : '#ff007f';
+                this.life = 1;
+            }
+            update() {
+                this.x += this.speedX;
+                this.y += this.speedY;
+                this.life -= 0.03;
+            }
+            draw() {
+                ctx.save();
+                ctx.globalAlpha = Math.max(0, this.life);
+                ctx.fillStyle = this.color;
+                ctx.shadowBlur = 10;
+                ctx.shadowColor = this.color;
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.fill();
+                ctx.restore();
+            }
+        }
+
+        function createParticleBurst(x, y) {
+            for (let i = 0; i < 12; i++) {
+                particles.push(new QuantumParticle(x, y));
+            }
+        }
+
+        function animateParticles() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            particles.forEach((p, index) => {
+                p.update();
+                p.draw();
+                if (p.life <= 0) particles.splice(index, 1);
+            });
+            requestAnimationFrame(animateParticles);
+        }
+        animateParticles();
 
         let currentInput = '0';
         let expressionVal = '';
@@ -241,16 +329,18 @@
         const scientificPanel = document.getElementById('scientific-panel');
 
         function triggerHaptic() {
-            if ('vibrate' in navigator) navigator.vibrate(20);
+            if ('vibrate' in navigator) navigator.vibrate(25);
         }
 
-        document.querySelectorAll('.btn-pro').forEach(button => {
+        document.querySelectorAll('.btn-cyber').forEach(button => {
             button.addEventListener('pointerdown', function (e) {
                 triggerHaptic();
+                const rect = button.getBoundingClientRect();
+                createParticleBurst(e.clientX, e.clientY);
+
                 const circle = document.createElement('span');
                 const diameter = Math.max(button.clientWidth, button.clientHeight);
                 const radius = diameter / 2;
-                const rect = button.getBoundingClientRect();
                 
                 circle.style.width = circle.style.height = `${diameter}px`;
                 circle.style.left = `${e.clientX - rect.left - radius}px`;
@@ -309,7 +399,7 @@
                 saveHistory(fullExpression, result);
 
                 display.classList.add('result-animate');
-                setTimeout(() => display.classList.remove('result-animate'), 200);
+                setTimeout(() => display.classList.remove('result-animate'), 250);
 
                 currentInput = result.toString();
                 expressionVal = '';
@@ -356,9 +446,9 @@
                 return;
             }
             historyList.innerHTML = history.map(item => `
-                <div class="p-2.5 bg-white/5 hover:bg-white/10 rounded-xl cursor-pointer transition" onclick="useHistory('${item.res}')">
+                <div class="p-2.5 bg-white/5 hover:bg-white/10 rounded-xl cursor-pointer transition border border-cyber-blue/10" onclick="useHistory('${item.res}')">
                     <div class="text-[11px] text-gray-400">${item.expr}</div>
-                    <div class="text-sm font-bold text-brand-blue font-mono">= ${item.res}</div>
+                    <div class="text-sm font-bold text-cyber-blue font-mono">= ${item.res}</div>
                 </div>
             `).join('');
         }
@@ -371,7 +461,7 @@
 
         document.querySelectorAll('.btn-num[data-num]').forEach(b => b.addEventListener('click', () => handleNumber(b.dataset.num)));
         document.querySelectorAll('.btn-action[data-action]').forEach(b => b.addEventListener('click', () => handleOperator(b.dataset.action)));
-        document.querySelectorAll('.btn-pro[data-op]').forEach(b => b.addEventListener('click', () => handleScientific(b.dataset.op)));
+        document.querySelectorAll('.btn-cyber[data-op]').forEach(b => b.addEventListener('click', () => handleScientific(b.dataset.op)));
 
         document.getElementById('btn-equals').addEventListener('click', calculate);
         document.getElementById('btn-clear').addEventListener('click', () => {
@@ -381,7 +471,7 @@
         });
         document.getElementById('btn-backspace').addEventListener('click', handleBackspace);
 
-        document.querySelectorAll('.btn-pro[data-mem]').forEach(b => {
+        document.querySelectorAll('.btn-cyber[data-mem]').forEach(b => {
             b.addEventListener('click', () => {
                 const action = b.dataset.mem;
                 const val = parseFloat(currentInput);
