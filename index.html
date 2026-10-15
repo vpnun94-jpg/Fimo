@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Quantum Aurora Pro Max Calculator</title>
-    <meta name="theme-color" content="#03050c">
+    <title>AI Quantum Pro Max Calculator</title>
+    <meta name="theme-color" content="#02040a">
     <meta name="apple-mobile-web-app-capable" content="yes">
     
     <!-- Tailwind CSS & Lucide Icons -->
@@ -17,12 +17,13 @@
             theme: {
                 extend: {
                     colors: {
-                        aurora: {
-                            bg: '#03050c',
+                        quantum: {
+                            bg: '#02040a',
                             cyan: '#00f2ff',
                             magenta: '#ff007f',
-                            violet: '#8a2be2',
-                            emerald: '#00ffcc'
+                            purple: '#8a2be2',
+                            emerald: '#00ffcc',
+                            midnight: '#070c1b'
                         }
                     }
                 }
@@ -45,98 +46,99 @@
             -webkit-user-select: none;
             touch-action: manipulation;
             font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            background-color: #03050c;
+            background-color: #02040a;
         }
 
-        /* Dynamic Mesh & Fluid Aurora Background Simulation via CSS */
-        .aurora-bg {
+        /* AI Interactive Aurora & Mesh Background */
+        .aurora-mesh {
             position: absolute;
             inset: -50%;
-            background: radial-gradient(circle at 20% 30%, rgba(0, 242, 255, 0.15) 0%, transparent 40%),
-                        radial-gradient(circle at 80% 70%, rgba(255, 0, 127, 0.12) 0%, transparent 40%),
-                        radial-gradient(circle at 50% 50%, rgba(138, 43, 226, 0.1) 0%, transparent 50%);
-            animation: auroraMotion 12s infinite alternate ease-in-out;
+            background: radial-gradient(circle at 15% 25%, rgba(0, 242, 255, 0.18) 0%, transparent 45%),
+                        radial-gradient(circle at 85% 75%, rgba(255, 0, 127, 0.15) 0%, transparent 45%),
+                        radial-gradient(circle at 50% 50%, rgba(138, 43, 226, 0.12) 0%, transparent 55%);
+            animation: meshFlow 10s infinite alternate ease-in-out;
             z-index: 0;
             pointer-events: none;
-            filter: blur(40px);
+            filter: blur(50px);
         }
 
-        @keyframes auroraMotion {
+        @keyframes meshFlow {
             0% { transform: scale(1) translate(0, 0) rotate(0deg); }
-            50% { transform: scale(1.15) translate(-3%, 4%) rotate(5deg); }
-            100% { transform: scale(1) translate(3%, -2%) rotate(-5deg); }
+            50% { transform: scale(1.1) translate(-4%, 3%) rotate(4deg); }
+            100% { transform: scale(1) translate(3%, -3%) rotate(-4deg); }
         }
 
-        /* Premium AMOLED Glassmorphism */
+        /* Next-Gen Glassmorphism & AMOLED Midnight UI */
         .glass-hud {
-            background: rgba(5, 8, 20, 0.78);
-            backdrop-filter: blur(25px);
-            -webkit-backdrop-filter: blur(25px);
-            border: 1px solid rgba(0, 242, 255, 0.2);
-            box-shadow: 0 0 50px rgba(0, 0, 0, 0.9), inset 0 0 25px rgba(0, 242, 255, 0.05);
+            background: rgba(7, 12, 27, 0.82);
+            backdrop-filter: blur(30px);
+            -webkit-backdrop-filter: blur(30px);
+            border: 1px solid rgba(0, 242, 255, 0.25);
+            box-shadow: 0 0 60px rgba(0, 0, 0, 0.95), inset 0 0 30px rgba(0, 242, 255, 0.06);
         }
 
         .light .glass-hud {
-            background: rgba(255, 255, 255, 0.9);
+            background: rgba(255, 255, 255, 0.92);
             border: 1px solid rgba(0, 0, 0, 0.1);
         }
 
-        /* Holographic Animated Border Beam */
-        @keyframes borderPulse {
-            0% { border-color: rgba(0, 242, 255, 0.3); box-shadow: 0 0 20px rgba(0,242,255,0.1); }
-            50% { border-color: rgba(255, 0, 127, 0.5); box-shadow: 0 0 35px rgba(255,0,127,0.2); }
-            100% { border-color: rgba(0, 242, 255, 0.3); box-shadow: 0 0 20px rgba(0,242,255,0.1); }
+        /* Border Beam & Cyber HUD Glowing */
+        @keyframes borderBeamPulse {
+            0% { border-color: rgba(0, 242, 255, 0.4); box-shadow: 0 0 25px rgba(0,242,255,0.15); }
+            50% { border-color: rgba(255, 0, 127, 0.6); box-shadow: 0 0 40px rgba(255,0,127,0.25); }
+            100% { border-color: rgba(0, 242, 255, 0.4); box-shadow: 0 0 25px rgba(0,242,255,0.15); }
         }
 
         .hud-border {
-            animation: borderPulse 5s infinite ease-in-out;
+            animation: borderBeamPulse 4s infinite ease-in-out;
         }
 
-        /* Tactile Press & Neon Ripple Effects */
-        .btn-aurora {
+        /* Spring Physics & 3D Tactile Press */
+        .btn-quantum {
             border-radius: 14px;
             position: relative;
             overflow: hidden;
             transition: transform 0.15s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.2s ease, background 0.2s ease;
             border: 1px solid rgba(255, 255, 255, 0.08);
             background: rgba(255, 255, 255, 0.03);
-            backdrop-filter: blur(10px);
+            backdrop-filter: blur(12px);
         }
 
-        .btn-aurora:active, .btn-aurora.btn-pressed {
-            transform: scale(0.88) translateY(2px);
+        .btn-quantum:active, .btn-quantum.btn-pressed {
+            transform: scale(0.86) translateY(2px);
         }
 
         .btn-num:active, .btn-num.btn-pressed {
-            box-shadow: 0 0 25px rgba(0, 242, 255, 0.8), inset 0 0 10px rgba(0, 242, 255, 0.4);
+            box-shadow: 0 0 30px rgba(0, 242, 255, 0.8), inset 0 0 12px rgba(0, 242, 255, 0.5);
             border-color: #00f2ff;
-            background: rgba(0, 242, 255, 0.2) !important;
+            background: rgba(0, 242, 255, 0.22) !important;
         }
 
         .btn-action:active, .btn-action.btn-pressed {
-            box-shadow: 0 0 30px rgba(138, 43, 226, 0.9), inset 0 0 12px rgba(138, 43, 226, 0.5);
+            box-shadow: 0 0 35px rgba(138, 43, 226, 0.9), inset 0 0 14px rgba(138, 43, 226, 0.6);
             border-color: #8a2be2;
             background: rgba(138, 43, 226, 0.3) !important;
             color: #fff !important;
         }
 
         .btn-danger:active, .btn-danger.btn-pressed {
-            box-shadow: 0 0 30px rgba(255, 0, 127, 0.9), inset 0 0 12px rgba(255, 0, 127, 0.5);
+            box-shadow: 0 0 35px rgba(255, 0, 127, 0.9), inset 0 0 14px rgba(255, 0, 127, 0.6);
             border-color: #ff007f;
             background: rgba(255, 0, 127, 0.3) !important;
         }
 
+        /* Neon Ripple Wave Effect */
         .ripple {
             position: absolute;
             border-radius: 50%;
             transform: scale(0);
-            animation: plasmaRipple 0.4s cubic-bezier(0.25, 1, 0.5, 1);
-            background: radial-gradient(circle, rgba(0,242,255,0.9) 0%, rgba(255,0,127,0.5) 45%, transparent 75%);
+            animation: quantumRipple 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+            background: radial-gradient(circle, rgba(0,242,255,0.95) 0%, rgba(255,0,127,0.6) 45%, transparent 80%);
             pointer-events: none;
         }
 
-        @keyframes plasmaRipple {
-            to { transform: scale(4.5); opacity: 0; }
+        @keyframes quantumRipple {
+            to { transform: scale(5); opacity: 0; }
         }
 
         #particle-canvas {
@@ -147,10 +149,10 @@
         }
 
         ::-webkit-scrollbar { width: 3px; height: 3px; }
-        ::-webkit-scrollbar-thumb { background: rgba(0, 242, 255, 0.3); border-radius: 8px; }
+        ::-webkit-scrollbar-thumb { background: rgba(0, 242, 255, 0.35); border-radius: 8px; }
 
         .result-animate {
-            animation: springUp 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            animation: springUp 0.22s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
 
         @keyframes springUp {
@@ -161,52 +163,52 @@
 </head>
 <body class="flex justify-center items-center relative overflow-hidden">
 
-    <!-- AI Aurora Background & Fluid Mesh Gradient Animation -->
-    <div class="aurora-bg"></div>
+    <!-- AI Aurora Background & Mesh Gradient -->
+    <div class="aurora-mesh"></div>
 
-    <!-- WebGL/Canvas Bioluminescent Particle System -->
+    <!-- Quantum Particle Field Canvas -->
     <canvas id="particle-canvas"></canvas>
 
     <!-- App Container -->
     <div class="relative w-full h-full glass-hud hud-border flex flex-col justify-end p-2.5 overflow-hidden text-white light:text-gray-900 transition-colors duration-300 z-20">
         
-        <!-- Top Controls Bar -->
+        <!-- Top HUD Controls Bar -->
         <div class="absolute top-2.5 inset-x-2.5 flex justify-between items-center z-25 px-1">
-            <button id="toggle-history" class="p-1.5 rounded-xl bg-white/5 hover:bg-white/15 active:scale-95 transition text-aurora-cyan border border-aurora-cyan/20">
+            <button id="toggle-history" class="p-1.5 rounded-xl bg-white/5 hover:bg-white/15 active:scale-95 transition text-quantum-cyan border border-quantum-cyan/20">
                 <i data-lucide="clock" class="w-4 h-4"></i>
             </button>
 
             <div class="flex items-center gap-1.5">
-                <button id="toggle-scientific" class="px-2.5 py-1 rounded-xl bg-white/5 hover:bg-white/15 text-xs font-semibold text-aurora-cyan border border-aurora-cyan/30 active:scale-95 transition">
+                <button id="toggle-scientific" class="px-2.5 py-1 rounded-xl bg-white/5 hover:bg-white/15 text-xs font-semibold text-quantum-cyan border border-quantum-cyan/30 active:scale-95 transition">
                     SCI
                 </button>
-                <button id="toggle-theme" class="p-1.5 rounded-xl bg-white/5 hover:bg-white/15 active:scale-95 transition text-aurora-cyan border border-aurora-cyan/20">
+                <button id="toggle-theme" class="p-1.5 rounded-xl bg-white/5 hover:bg-white/15 active:scale-95 transition text-quantum-cyan border border-quantum-cyan/20">
                     <i data-lucide="sun" class="w-4 h-4 hidden light:block"></i>
                     <i data-lucide="moon" class="w-4 h-4 block light:hidden"></i>
                 </button>
             </div>
         </div>
 
-        <!-- History Drawer -->
-        <div id="history-drawer" class="absolute inset-x-0 top-0 h-[65%] glass-hud rounded-b-3xl z-40 transform -translate-y-full transition-transform duration-300 ease-in-out p-4 flex flex-col justify-between shadow-2xl border-b border-aurora-cyan/30">
+        <!-- History Drawer Timeline -->
+        <div id="history-drawer" class="absolute inset-x-0 top-0 h-[65%] glass-hud rounded-b-3xl z-40 transform -translate-y-full transition-transform duration-300 ease-in-out p-4 flex flex-col justify-between shadow-2xl border-b border-quantum-cyan/30">
             <div class="flex justify-between items-center border-b border-white/10 pb-2">
-                <span class="font-bold text-xs text-aurora-cyan flex items-center gap-1.5">
-                    <i data-lucide="history" class="w-3.5 h-3.5"></i> سجل الحسابات الأوروري
+                <span class="font-bold text-xs text-quantum-cyan flex items-center gap-1.5">
+                    <i data-lucide="history" class="w-3.5 h-3.5"></i> سجل الحسابات الكمومي الذكي
                 </span>
-                <button id="clear-history" class="text-xs text-aurora-magenta hover:text-pink-300 flex items-center gap-1">
+                <button id="clear-history" class="text-xs text-quantum-magenta hover:text-pink-300 flex items-center gap-1">
                     <i data-lucide="trash-2" class="w-3 h-3"></i> مسح
                 </button>
             </div>
             <div id="history-list" class="flex-1 overflow-y-auto my-2 space-y-2 text-left dir-ltr text-sm">
                 <div class="text-center text-gray-500 py-8">لا يوجد سجل</div>
             </div>
-            <button id="close-history" class="w-full py-2 rounded-xl bg-aurora-cyan/25 text-aurora-cyan text-xs font-semibold border border-aurora-cyan/30">إغلاق</button>
+            <button id="close-history" class="w-full py-2 rounded-xl bg-quantum-cyan/25 text-quantum-cyan text-xs font-semibold border border-quantum-cyan/30">إغلاق</button>
         </div>
 
         <!-- Display Area -->
         <div class="flex flex-col justify-end text-left px-2 py-3 mb-2 dir-ltr overflow-hidden relative cursor-pointer" id="display-container">
-            <div id="expression" class="text-aurora-cyan/70 text-xs font-mono h-4 overflow-x-auto whitespace-nowrap scrollbar-none"></div>
-            <div id="display" class="text-4xl font-light tracking-tight text-white light:text-gray-900 truncate font-mono drop-shadow-[0_0_20px_rgba(0,242,255,0.5)]">
+            <div id="expression" class="text-quantum-cyan/70 text-xs font-mono h-4 overflow-x-auto whitespace-nowrap scrollbar-none"></div>
+            <div id="display" class="text-4xl font-light tracking-tight text-white light:text-gray-900 truncate font-mono drop-shadow-[0_0_20px_rgba(0,242,255,0.6)]">
                 0
             </div>
         </div>
@@ -215,59 +217,59 @@
         <div class="flex flex-col gap-1.5 pb-1">
             <!-- Scientific Panel -->
             <div id="scientific-panel" class="grid grid-cols-5 gap-1 hidden dir-ltr">
-                <button class="btn-aurora btn-action py-1.5 text-[11px] text-aurora-cyan" data-op="sin">sin</button>
-                <button class="btn-aurora btn-action py-1.5 text-[11px] text-aurora-cyan" data-op="cos">cos</button>
-                <button class="btn-aurora btn-action py-1.5 text-[11px] text-aurora-cyan" data-op="tan">tan</button>
-                <button class="btn-aurora btn-action py-1.5 text-[11px] text-aurora-cyan" data-op="log">log</button>
-                <button class="btn-aurora btn-action py-1.5 text-[11px] text-aurora-cyan" data-op="ln">ln</button>
-                <button class="btn-aurora btn-num py-1.5 text-[11px] text-gray-300" data-op="sqrt">√</button>
-                <button class="btn-aurora btn-num py-1.5 text-[11px] text-gray-300" data-op="pow">x²</button>
-                <button class="btn-aurora btn-num py-1.5 text-[11px] text-gray-300" data-op="pi">π</button>
-                <button class="btn-aurora btn-num py-1.5 text-[11px] text-gray-300" data-op="e">e</button>
-                <button class="btn-aurora btn-num py-1.5 text-[11px] text-gray-300" data-op="fact">n!</button>
+                <button class="btn-quantum btn-action py-1.5 text-[11px] text-quantum-cyan" data-op="sin">sin</button>
+                <button class="btn-quantum btn-action py-1.5 text-[11px] text-quantum-cyan" data-op="cos">cos</button>
+                <button class="btn-quantum btn-action py-1.5 text-[11px] text-quantum-cyan" data-op="tan">tan</button>
+                <button class="btn-quantum btn-action py-1.5 text-[11px] text-quantum-cyan" data-op="log">log</button>
+                <button class="btn-quantum btn-action py-1.5 text-[11px] text-quantum-cyan" data-op="ln">ln</button>
+                <button class="btn-quantum btn-num py-1.5 text-[11px] text-gray-300" data-op="sqrt">√</button>
+                <button class="btn-quantum btn-num py-1.5 text-[11px] text-gray-300" data-op="pow">x²</button>
+                <button class="btn-quantum btn-num py-1.5 text-[11px] text-gray-300" data-op="pi">π</button>
+                <button class="btn-quantum btn-num py-1.5 text-[11px] text-gray-300" data-op="e">e</button>
+                <button class="btn-quantum btn-num py-1.5 text-[11px] text-gray-300" data-op="fact">n!</button>
             </div>
 
             <!-- Memory Row -->
             <div class="grid grid-cols-4 gap-1 dir-ltr">
-                <button class="btn-aurora py-1 text-[11px] text-gray-400 btn-num" data-mem="mc">MC</button>
-                <button class="btn-aurora py-1 text-[11px] text-gray-400 btn-num" data-mem="mr">MR</button>
-                <button class="btn-aurora py-1 text-[11px] text-gray-400 btn-num" data-mem="m+">M+</button>
-                <button class="btn-aurora py-1 text-[11px] text-gray-400 btn-num" data-mem="m-">M-</button>
+                <button class="btn-quantum py-1 text-[11px] text-gray-400 btn-num" data-mem="mc">MC</button>
+                <button class="btn-quantum py-1 text-[11px] text-gray-400 btn-num" data-mem="mr">MR</button>
+                <button class="btn-quantum py-1 text-[11px] text-gray-400 btn-num" data-mem="m+">M+</button>
+                <button class="btn-quantum py-1 text-[11px] text-gray-400 btn-num" data-mem="m-">M-</button>
             </div>
 
             <!-- Main Keypad Grid -->
             <div class="grid grid-cols-4 gap-1.5 dir-ltr">
                 <!-- Row 1 -->
-                <button class="btn-aurora btn-danger h-11 text-aurora-magenta font-semibold text-base" id="btn-clear">C</button>
-                <button class="btn-aurora btn-action h-11 text-aurora-cyan font-semibold text-base" data-action="(">(</button>
-                <button class="btn-aurora btn-action h-11 text-aurora-cyan font-semibold text-base" data-action=")">)</button>
-                <button class="btn-aurora btn-action h-11 text-aurora-cyan font-semibold text-lg" data-action="÷">÷</button>
+                <button class="btn-quantum btn-danger h-11 text-quantum-magenta font-semibold text-base" id="btn-clear">C</button>
+                <button class="btn-quantum btn-action h-11 text-quantum-cyan font-semibold text-base" data-action="(">(</button>
+                <button class="btn-quantum btn-action h-11 text-quantum-cyan font-semibold text-base" data-action=")">)</button>
+                <button class="btn-quantum btn-action h-11 text-quantum-cyan font-semibold text-lg" data-action="÷">÷</button>
 
                 <!-- Row 2 -->
-                <button class="btn-aurora btn-num h-11 text-white light:text-gray-800 text-lg font-medium" data-num="7">7</button>
-                <button class="btn-aurora btn-num h-11 text-white light:text-gray-800 text-lg font-medium" data-num="8">8</button>
-                <button class="btn-aurora btn-num h-11 text-white light:text-gray-800 text-lg font-medium" data-num="9">9</button>
-                <button class="btn-aurora btn-action h-11 text-aurora-cyan font-semibold text-lg" data-action="×">×</button>
+                <button class="btn-quantum btn-num h-11 text-white light:text-gray-800 text-lg font-medium" data-num="7">7</button>
+                <button class="btn-quantum btn-num h-11 text-white light:text-gray-800 text-lg font-medium" data-num="8">8</button>
+                <button class="btn-quantum btn-num h-11 text-white light:text-gray-800 text-lg font-medium" data-num="9">9</button>
+                <button class="btn-quantum btn-action h-11 text-quantum-cyan font-semibold text-lg" data-action="×">×</button>
 
                 <!-- Row 3 -->
-                <button class="btn-aurora btn-num h-11 text-white light:text-gray-800 text-lg font-medium" data-num="4">4</button>
-                <button class="btn-aurora btn-num h-11 text-white light:text-gray-800 text-lg font-medium" data-num="5">5</button>
-                <button class="btn-aurora btn-num h-11 text-white light:text-gray-800 text-lg font-medium" data-num="6">6</button>
-                <button class="btn-aurora btn-action h-11 text-aurora-cyan font-semibold text-lg" data-action="-">-</button>
+                <button class="btn-quantum btn-num h-11 text-white light:text-gray-800 text-lg font-medium" data-num="4">4</button>
+                <button class="btn-quantum btn-num h-11 text-white light:text-gray-800 text-lg font-medium" data-num="5">5</button>
+                <button class="btn-quantum btn-num h-11 text-white light:text-gray-800 text-lg font-medium" data-num="6">6</button>
+                <button class="btn-quantum btn-action h-11 text-quantum-cyan font-semibold text-lg" data-action="-">-</button>
 
                 <!-- Row 4 -->
-                <button class="btn-aurora btn-num h-11 text-white light:text-gray-800 text-lg font-medium" data-num="1">1</button>
-                <button class="btn-aurora btn-num h-11 text-white light:text-gray-800 text-lg font-medium" data-num="2">2</button>
-                <button class="btn-aurora btn-num h-11 text-white light:text-gray-800 text-lg font-medium" data-num="3">3</button>
-                <button class="btn-aurora btn-action h-11 text-aurora-cyan font-semibold text-lg" data-action="+">+</button>
+                <button class="btn-quantum btn-num h-11 text-white light:text-gray-800 text-lg font-medium" data-num="1">1</button>
+                <button class="btn-quantum btn-num h-11 text-white light:text-gray-800 text-lg font-medium" data-num="2">2</button>
+                <button class="btn-quantum btn-num h-11 text-white light:text-gray-800 text-lg font-medium" data-num="3">3</button>
+                <button class="btn-quantum btn-action h-11 text-quantum-cyan font-semibold text-lg" data-action="+">+</button>
 
                 <!-- Row 5 -->
-                <button class="btn-aurora btn-num h-11 text-white light:text-gray-800 text-lg font-medium" data-num="0">0</button>
-                <button class="btn-aurora btn-num h-11 text-white light:text-gray-800 text-lg font-medium" data-num=".">.</button>
-                <button class="btn-aurora btn-danger h-11 text-gray-300 flex items-center justify-center" id="btn-backspace">
+                <button class="btn-quantum btn-num h-11 text-white light:text-gray-800 text-lg font-medium" data-num="0">0</button>
+                <button class="btn-quantum btn-num h-11 text-white light:text-gray-800 text-lg font-medium" data-num=".">.</button>
+                <button class="btn-quantum btn-danger h-11 text-gray-300 flex items-center justify-center" id="btn-backspace">
                     <i data-lucide="delete" class="w-4 h-4"></i>
                 </button>
-                <button class="btn-aurora btn-equals btn-action h-11 bg-gradient-to-r from-aurora-cyan via-aurora-violet to-aurora-magenta text-white font-bold text-xl shadow-[0_0_20px_rgba(0,242,255,0.4)]" id="btn-equals">=</button>
+                <button class="btn-quantum btn-equals btn-action h-11 bg-gradient-to-r from-quantum-cyan via-quantum-purple to-quantum-magenta text-white font-bold text-xl shadow-[0_0_20px_rgba(0,242,255,0.4)]" id="btn-equals">=</button>
             </div>
         </div>
     </div>
@@ -276,7 +278,7 @@
     <script>
         lucide.createIcons();
 
-        // Canvas Bioluminescent Particle System
+        // GPU Fluid Simulation & Quantum Particle Field
         const canvas = document.getElementById('particle-canvas');
         const ctx = canvas.getContext('2d');
         let particles = [];
@@ -288,13 +290,13 @@
         window.addEventListener('resize', resizeCanvas);
         resizeCanvas();
 
-        class AuroraParticle {
+        class QuantumParticle {
             constructor(x, y) {
                 this.x = x;
                 this.y = y;
-                this.size = Math.random() * 3 + 0.8;
-                this.speedX = (Math.random() - 0.5) * 3;
-                this.speedY = (Math.random() - 0.5) * 3;
+                this.size = Math.random() * 3.5 + 0.8;
+                this.speedX = (Math.random() - 0.5) * 3.5;
+                this.speedY = (Math.random() - 0.5) * 3.5;
                 this.color = Math.random() > 0.5 ? '#00f2ff' : '#ff007f';
                 this.life = 1;
             }
@@ -307,7 +309,7 @@
                 ctx.save();
                 ctx.globalAlpha = Math.max(0, this.life);
                 ctx.fillStyle = this.color;
-                ctx.shadowBlur = 12;
+                ctx.shadowBlur = 14;
                 ctx.shadowColor = this.color;
                 ctx.beginPath();
                 ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
@@ -318,7 +320,7 @@
 
         function createParticleBurst(x, y) {
             for (let i = 0; i < 12; i++) {
-                particles.push(new AuroraParticle(x, y));
+                particles.push(new QuantumParticle(x, y));
             }
         }
 
@@ -349,7 +351,7 @@
             if ('vibrate' in navigator) navigator.vibrate(20);
         }
 
-        document.querySelectorAll('.btn-aurora').forEach(button => {
+        document.querySelectorAll('.btn-quantum').forEach(button => {
             button.addEventListener('pointerdown', function (e) {
                 triggerHaptic();
                 const rect = button.getBoundingClientRect();
@@ -453,9 +455,9 @@
                 return;
             }
             historyList.innerHTML = history.map(item => `
-                <div class="p-2.5 bg-white/5 hover:bg-white/10 rounded-xl cursor-pointer transition border border-aurora-cyan/10" onclick="useHistory('${item.res}')">
+                <div class="p-2.5 bg-white/5 hover:bg-white/10 rounded-xl cursor-pointer transition border border-quantum-cyan/10" onclick="useHistory('${item.res}')">
                     <div class="text-[11px] text-gray-400">${item.expr}</div>
-                    <div class="text-sm font-bold text-aurora-cyan font-mono">= ${item.res}</div>
+                    <div class="text-sm font-bold text-quantum-cyan font-mono">= ${item.res}</div>
                 </div>
             `).join('');
         }
@@ -475,7 +477,7 @@
             }
         }));
         
-        document.querySelectorAll('.btn-aurora[data-op]').forEach(b => b.addEventListener('click', () => handleScientific(b.dataset.op)));
+        document.querySelectorAll('.btn-quantum[data-op]').forEach(b => b.addEventListener('click', () => handleScientific(b.dataset.op)));
 
         document.getElementById('btn-equals').addEventListener('click', calculate);
         document.getElementById('btn-clear').addEventListener('click', () => {
@@ -485,7 +487,7 @@
         });
         document.getElementById('btn-backspace').addEventListener('click', handleBackspace);
 
-        document.querySelectorAll('.btn-aurora[data-mem]').forEach(b => {
+        document.querySelectorAll('.btn-quantum[data-mem]').forEach(b => {
             b.addEventListener('click', () => {
                 const action = b.dataset.mem;
                 const val = parseFloat(currentInput);
